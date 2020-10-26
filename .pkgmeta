@@ -3,9 +3,9 @@ package-as: DadGratz
 enable-nolib-creation: no
 
 externals:
-  Libraries\Ace3: https://www.curseforge.com/wow/addons/ace3
-  Libraries\LibDBIcon-1.0
-  Libraries\LibDataBroker-1.1: http://github.com/tekkub/libdatabroker-1-1/
+  Libraries\Ace3: https://repos.curseforge.com/wow/ace3/trunk
+  Libraries\LibDBIcon-1.0: https://repos.curseforge.com/wow/libdbicon-1-0/trunk
+  Libraries\LibDataBroker-1.1: https://repos.curseforge.com/wow/libdatabroker-1-1
 
 license-output: LICENSE
 

@@ -6,5 +6,5 @@ local debug = false
   debug = true
   --@end-debug@
 
-local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "enUS", true, debug)
-  --@localization(locale="enUS", format="lua_additive_table", handle-subnamespaces="Subtable")@
+local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "frFR", true, debug)
+  --@localization(locale="frFR", format="lua_additive_table", handle-subnamespaces="Subtable")@
