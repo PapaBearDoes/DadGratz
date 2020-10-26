@@ -1,14 +1,14 @@
 local DadGratz = select(2, ...)
-local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
---local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "enUS", true)
+-- local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
+-- local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "enUS", true)
 
-local DadGratz = LibStub("AceAddon-3.0"):NewAddon("DadGratz", "AceConsole-3.0")
+-- local DadGratz = LibStub("AceAddon-3.0"):NewAddon("DadGratz", "AceConsole-3.0")
 
 --Make the LibDataBroker
 local DadGratzLDB = LibStub("LibDataBroker-1.1"):NewDataObject("DadGratzLDB", {
   type = "data source",
   text = "DadGratz",
-	icon = "Interface\\Icons\\",
+	icon = "Interface\\Icons\\INV_Guild_Standard_Horde_C",
 	OnTooltipShow = function(tooltip)
 		tooltip:AddDoubleLine("");
 		tooltip:AddDoubleLine("");
@@ -22,15 +22,15 @@ local DadGratzLDB = LibStub("LibDataBroker-1.1"):NewDataObject("DadGratzLDB", {
 local DadGratzIcon = LibStub("LibDBIcon-1.0")
 
 --Functions
-function DadGratz:OnInitialize()
+function DadGratzIcon:OnInitialize()
 	self.db = LibStub("AceDB-3.0"):New("DadGratzSV", {
   	minimap = {
     	hide = false,
 			minimapPos = 90,
   	},
-		DadGratz = {
+--		DadGratz = {
 --			Key = Value,
-		}
+--		}
 	})
-	DadGratzIcon:Register("DadGratz", DadGratzLDB, self.db.profile.minimap)
+	DadGratzIcon:Register("DadGratz", DadGratzLDB, self.db.minimap)
 end

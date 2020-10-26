@@ -1,21 +1,20 @@
-local DadGratz = select(2, ...)
-local DadGratz = LibStub("AceAddon-3.0"):NewAddon(DadGratz, "DadGratz", "AceConsole-3.0", "AceEvent-3.0")
-local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
---local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "enUS", true)
+-- local DadGratz = select(2, ...)
+local DadGratz = LibStub("AceAddon-3.0"):NewAddon("DadGratz", "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0")
+-- local L = LibStub("AceLocale-3.0"):NewLocale("DadGratzLocales", "enUS", true)
+-- local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
+local DadGratzOpts = DadGratz:NewModule("DadGratzOpts", "AceConsole-3.0")
 
-local Opts = DadGratz:NewModule("Opts", "AceConsole-3.0")
-
-function Opts:OnInitialize()
-  self.db = LibStub("AceDB-3.0"):New("DadGratz")
+function DadGratzOpts:OnInitialize()
+  self.db = LibStub("AceDB-3.0"):New("DadGratzDB")
 end
 
-function Opts:SetTrigger(info, input)
+function DadGratzOpts:SetTrigger(info, input)
   self.db.global.Trigger = input
   print("Set trigger to ", input)
 end
 
-function Opts:SetEnableAddon(info)
-  if Opts:self.db.global.AddonEnabled(info) == false then
+function DadGratzOpts:SetEnableAddon(info)
+  if DadGratzOpts:GetAddonEnabled(info) == false then
     print("DadGratz is now enabled")
 		self.db.global.AddonEnabled = true
   else print("DadGratz is now disabled")
@@ -23,20 +22,11 @@ function Opts:SetEnableAddon(info)
   end
 end
 
-function Opts:GetAddonEnabled(info)
+function DadGratzOpts:GetAddonEnabled(info)
   return self.db.global.AddonEnabled
 end
 
-function Opts:SetRaidIcon(info, input)
-  if Opts:GetRaidIcon(info) == false then
-    print("Raid icon will now be used")
-    self.db.global.UseRaidIcon = true
-  else print("Raid icon is now disabled")
-    self.db.global.UseRaidIcon = false
-  end
-end
-
-function Opts:SetChannel(info, input)
+function DadGratzOpts:SetChannel(info, input)
   input = strupper(input)
   if (input == 'GUILD' or input == 'OFFICER' or input == 'WHISPER' or input == 'PARTY') then
     self.db.global.Channel = input
@@ -47,8 +37,8 @@ function Opts:SetChannel(info, input)
 end
 
 local options = {
-  name = "DadGratz",
-  handler = Opts,
+  name = "DadGratzOptions",
+  handler = DadGratzOpts,
   type = 'group',
   args = {
     --trigger
@@ -84,4 +74,4 @@ local options = {
   },
 }
 
-LibStub("AceConfig-3.0"):RegisterOptionsTable("DadGratz", options, {"/dg"})
+LibStub("AceConfig-3.0"):RegisterOptionsTable("DadGratzOptions", options, {"/dg"})
