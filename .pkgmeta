@@ -9,5 +9,8 @@ externals:
 
 license-output: LICENSE
 
+ignore:
+  - ToDo
+
 tools-used:
     - libdatabroker-1-1
