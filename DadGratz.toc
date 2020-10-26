@@ -42,12 +42,13 @@ Libraries\LibDBIcon-1.0\LibDBIcon-1.0.lua
 Libraries\AceConfig-3.0\AceConfig-3.0.xml
 Libraries\AceEvent-3.0\AceEvent-3.0.xml
 Libraries\AceGUI-3.0\AceGUI-3.0.xml
-Libraries\AceGUI-3.0_SFX-Widgets\AceGUI-3.0_SFX-Widgets.xml
-Libraries\AceGUI-3.0-SharedMediaWidgets\widget.xml
 Libraries\AceTimer-3.0\AceTimer-3.0.xml
 
 # Load Languages
 Locales\locales.xml
 
-# Load Main file
+# Load Modules
+Modules\modules.xml
+
+# Load Main file(s)
 DadGratz.lua
