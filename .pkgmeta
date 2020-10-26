@@ -1,8 +1,11 @@
 package-as: DadGratz
 
+enable-nolib-creation: no
+
 externals:
-  Libraries/LibStub: https://repos.curseforge.com/wow/libstub/trunk
-  Libraries/LibDataBroker-1.1: http://github.com/tekkub/libdatabroker-1-1/
+  Libraries\Ace3: https://www.curseforge.com/wow/addons/ace3
+  Libraries\LibDBIcon-1.0
+  Libraries\LibDataBroker-1.1: http://github.com/tekkub/libdatabroker-1-1/
 
 license-output: LICENSE
 
