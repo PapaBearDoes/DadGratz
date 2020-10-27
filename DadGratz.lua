@@ -7,6 +7,8 @@
 -- step two: Localizations
 -- step three: GUI setup
 local DG = select(2, ...)
+local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
+
 DG.version = GetAddOnMetadata("DadGratz", "Version")
 
 -- Default the saved variables
@@ -42,7 +44,7 @@ function DG:OnInitialize()
   		tooltip:AddDoubleLine("");
   		tooltip:AddDoubleLine("");
   	end,
-  	OnClick = function(self, button)
+  	OnClick = function(self, button) -- Left Click = Enable/Disable Addon, Right Click = open options GUI.
   	end
   })
   --Make the MiniMap Button

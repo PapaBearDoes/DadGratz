@@ -1,4 +1,6 @@
 local DG = select(2, ...)
+local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
+
 local Events = DG:NewModule("Events", "AceEvent-3.0")
 local Util = DG:GetModule("Utils")
 

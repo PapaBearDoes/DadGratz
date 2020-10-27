@@ -1,5 +1,7 @@
 local DG = select(2, ...)
-local Util = DG:NewModule("Utils")
+local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
+
+local Util = DG:NewModule("Utils", "AceConsole-3.0")
 
 function Util:ConvertTime(Current, Past)
 	local Current = Current
