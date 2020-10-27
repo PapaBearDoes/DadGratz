@@ -1,0 +1,31 @@
+local DG = select(2, ...)
+local Util = DG:NewModule("Utils")
+
+function Util:ConvertTime(Current, Past)
+	local Current = Current
+	local Past = Past
+	local Difference = (Current - Past)
+	return Difference
+end
+
+function Util:LastRunCheck()
+	local Current = time()
+	local Past = (DG.LastRunDelayTime + DG.db.global["LockOutTime"])
+	if Current > Past then
+		return "Yes"
+	else
+		return "No"
+	end
+end
+
+function Util:StartsWith(String,Start)
+   return string.sub(String,1,string.len(Start))==Start
+end
+
+function DG:TriggeredEvent(message, recipient, channel)
+	Util:Process(message, recipient, channel)
+end
+
+function Util:SendMessage(message, recipient, channel)
+  SendChatMessage(message, "GUILD", "Common", recipient)
+end

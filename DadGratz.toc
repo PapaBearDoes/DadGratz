@@ -15,7 +15,7 @@
 ## Notes-ptBR: #
 ## Notes-zhCN: #
 ## Notes-zhTW: #
-## Version: 1.0.0-alpha #@project-version@
+## Version: 1.0.0-alpha
 
 # X-Meta
 ## X-Category: Guild, Achievements, Boss Encounters, Chat & Communications, Miscellaneous
@@ -36,6 +36,7 @@ Libraries\AceLocale-3.0\AceLocale-3.0.xml
 Libraries\AceAddon-3.0\AceAddon-3.0.xml
 Libraries\AceConsole-3.0\AceConsole-3.0.xml
 Libraries\AceDB-3.0\AceDB-3.0.xml
+Libraries\AceDBOptions-3.0\AceDBOptions-3.0.xml
 Libraries\LibDataBroker-1.1\LibDataBroker-1.1.lua
 Libraries\LibDBIcon-1.0\LibDBIcon-1.0.lua
 # Load Addon Specific Libraries
