@@ -1,5 +1,5 @@
 local DG = select(2, ...)
-local DG = LibStub("AceAddon-3.0"):NewAddon(DG, "DadGratz", "AceConsole-3.0", "AceEvent-3.0", "AceGUI-3.0")
+local DG = LibStub("AceAddon-3.0"):NewAddon(DG, "DadGratz", "AceConsole-3.0", "AceEvent-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
 local DadGratzOpts = DG:NewModule("DadGratzOpts", "AceConsole-3.0")
 

@@ -62,3 +62,63 @@ end
 function DG:CHAT_MSG_GUILD(_,MSG,Auth)
   DG:TriggeredEvent(MSG,Auth,"Guild")
 end
+
+--GUI testing
+-- Messing around!
+local optsGUI = LibStub("AceGUI-3.0")
+
+-- function that draws the widgets for the first tab
+local function DrawGroup1(container)
+  local desc = optsGUI:Create("Label")
+  desc:SetText("This is Tab 1")
+  desc:SetFullWidth(true)
+  container:AddChild(desc)
+
+  local button = optsGUI:Create("Button")
+  button:SetText("Tab 1 Button")
+  button:SetWidth(200)
+  container:AddChild(button)
+end
+
+-- function that draws the widgets for the second tab
+local function DrawGroup2(container)
+  local desc = optsGUI:Create("Label")
+  desc:SetText("This is Tab 2")
+  desc:SetFullWidth(true)
+  container:AddChild(desc)
+
+  local button = optsGUI:Create("Button")
+  button:SetText("Tab 2 Button")
+  button:SetWidth(200)
+  container:AddChild(button)
+end
+
+-- Callback function for OnGroupSelected
+local function SelectGroup(container, event, group)
+   container:ReleaseChildren()
+   if group == "tab1" then
+      DrawGroup1(container)
+   elseif group == "tab2" then
+      DrawGroup2(container)
+   end
+end
+
+-- Create the frame container
+local optsFrame = optsGUI:Create("Frame")
+optsFrame:SetTitle("Example Frame")
+optsFrame:SetStatusText("AceGUI-3.0 Example Container Frame")
+optsFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
+-- Fill Layout - the TabGroup widget will fill the whole frame
+optsFrame:SetLayout("Fill")
+
+-- Create the TabGroup
+local tab = optsGUI:Create("TabGroup")
+tab:SetLayout("Flow")
+-- Setup which tabs to show
+tab:SetTabs({{text="Tab 1", value="tab1"}, {text="Tab 2", value="tab2"}})
+-- Register callback
+tab:SetCallback("OnGroupSelected", SelectGroup)
+-- Set initial Tab (this will fire the OnGroupSelected callback)
+tab:SelectTab("tab1")
+-- add to the frame container
+optsFrame:AddChild(tab)
