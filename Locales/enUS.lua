@@ -20,6 +20,28 @@ if not L then return end
 --@localization(locale="enUS", format="lua_additive_table")@
 
 --@do-not-package@
+L["GeneralSettings"] = "General Settings"
+L["Jokes"] = ""
+L["Safe"] = ""
+L["SafeJokes"] = ""
+L["AddNewSafeJoke"] = ""
+L["AddNewSafeJokeInput"] = ""
+L["AddNewSafeJokeButton"] = ""
+L["Questionable"] = ""
+L["QuestionableJokes"] = ""
+L["AddNewQuestionableJoke"] = ""
+L["AddNewQuestionableJokeInput"] = ""
+L["AddNewQuestionableJokeButton"] = ""
+L["Dark"] = ""
+L["DarkJokes"] = ""
+L["AddNewDarkJoke"] = ""
+L["AddNewDarkJokeInput"] = ""
+L["AddNewDarkJokeButton"] = ""
+L["NSFW"] = ""
+L["NSFWJokes"] = ""
+L["AddNewNSFWJoke"] = ""
+L["AddNewNSFWJokeInput"] = ""
+L["AddNewNSFWJokeButton"] = ""
 --@end-do-not-package@
 
 --[[
