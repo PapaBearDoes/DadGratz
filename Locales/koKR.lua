@@ -1,5 +1,34 @@
--- Please use the Localization App on Curseforge to Update this
--- https://www.curseforge.com/wow/addons/dadgratz/localization
-local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "koKR")
+--[[
+                                      \\\\///
+                                     /       \
+                                   (| (.)(.) |)
+     .---------------------------.OOOo--()--oOOO.---------------------------.
+     |                                                                      |
+     |  @file-author@'s Durrrability Addon for World of Warcraft
+     ######################################################################## ]]
+--   ## Let's init this file shall we?
+-- Imports
+local me, ns = ...
+local lang = GetLocale()
+local l = LibStub("AceLocale-3.0")
+local L = l:NewLocale(me, "koKR")
+if not L then return end
+-- End Imports
+--[[ ######################################################################## ]]
+--   ## Do All The Things!!!
 
--- koKR Localization
+--@localization(locale="koKR", format="lua_additive_table")@
+
+--@do-not-package@
+--@end-do-not-package@
+
+--[[
+     ########################################################################
+     |  Last Editted By: @file-author@ - @file-date-iso@
+     |  @file-revision@
+     |                                                                      |
+     '-------------------------.oooO----------------------------------------|
+                              (    )     Oooo.
+                              \  (     (    )
+                               \__)     )  /
+                                       (__/                                   ]]

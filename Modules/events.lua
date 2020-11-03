@@ -4,23 +4,17 @@
                                    (| (.)(.) |)
      .---------------------------.OOOo--()--oOOO.---------------------------.
      |                                                                      |
-     |  @file-author@'s Durrrability Addon for World of Warcraft
+     |  @file-author@'s DadGratz Addon for World of Warcraft
      ######################################################################## ]]
 --   ## Let's init this file shall we?
 -- Imports
+local _G = _G
 local me, ns = ...
-local lang = GetLocale()
-local l = LibStub("AceLocale-3.0")
-local L = l:NewLocale(me, "frFR")
-if not L then return end
+local addon = ns
+local L = addon:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-
---@localization(locale="frFR", format="lua_additive_table")@
-
---@do-not-package@
---@end-do-not-package@
 
 --[[
      ########################################################################

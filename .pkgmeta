@@ -1,17 +1,22 @@
 package-as: DadGratz
-
 enable-nolib-creation: no
 
 externals:
-  Libraries\CallbackHandler-1.0: https://repos.curseforge.com/wow/callbackhandler/trunk
+  Libraries\LibInit: https://github.com/alarofrunetotem/LibInit.git/LibInit
+  Libraries\LibDialog-1.0: https://repos.curseforge.com/wow/libdialog-1-0
   Libraries\LibDBIcon-1.0: https://repos.curseforge.com/wow/libdbicon-1-0/trunk
-  Libraries\LibDataBroker-1.1: https://repos.curseforge.com/wow/libdatabroker-1-1
-  Libraries\LibStub: https://repos.curseforge.com/wow/libstub/trunk
-
-license-output: LICENSE
 
 ignore:
-  - ToDo
+  - .git
+  - .gitattributes
+  - .gitignore
+  - template.lua
+
+optional-dependencies:
+  - LibInit
+  - LibDialog-1.0
+
+license-output: LICENSE
 
 tools-used:
     - libdatabroker-1-1
