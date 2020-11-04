@@ -11,44 +11,14 @@
 local _G = _G
 local me, ns = ...
 local addon = ns
+--local addon = LibStub("LibInit"):NewAddon(ns, me, true, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0")
 local L = addon:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-function addon:OnInitialize()
-  --Fire up the DB
-  addon.db = LibStub("AceDB-3.0"):New(me, DG_dbDefaults, "Default")
-  if not addon.db then
-    local errorDB = L["ErrorDB"]
-    print(errorDB)
-  end
-
-  --Register the Profile Callbacks
-  --addon.db.RegisterCallback(self, "OnProfileChanged", "UpdateProfile")
-  --addon.db.RegisterCallback(self, "OnProfileCopied", "UpdateProfile")
-  --addon.db.RegisterCallback(self, "OnProfileReset", "UpdateProfile")
-
-  --Create the Dialogs
-  --addon:CreateDialogs()
-
-  --Register events
-  --addon:RegisterEvent("PLAYER_DEAD", "ScheduleUpdate")
-
-  --addon:UpdateIcon()
-  --addon:ScheduleUpdate()
-end
-
-function addon:OnEnable()
-  for i, v in ipairs(DG_globals.enableTasks) do
-    v(self)
-  end
-  DG_globals.enableTasks = nil
-
-  --addon:ScheduleRepeatingTimer("MainUpdate", 1)
-end
-
-function addon:OnDisable()
-end
+jokesDark = {
+  ["key"] = "value",
+},
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@

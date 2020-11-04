@@ -38,8 +38,17 @@ Libraries\LibInit\Libinit.xml
 Libraries\LibDialog-1.0\lib.xml
 Libraries\LibDBIcon-1.0\LibDBIcon-1.0.lua
 
+#Load locales
+Locales\locales.xml
+
+#Load Jokes
+Jokes\jokes.xml
+
 #Load Main Files
-DadGratz.xml
+DadGratz.lua
+
+#Load the rest
+Modules\includes.xml
 
 #Last Editted By: @file-author@ - @file-date-iso@
 #@file-revision@
