@@ -24,9 +24,9 @@ function addon:OnInitialize()
   end
 
   --Register the Profile Callbacks
-  --addon.db.RegisterCallback(self, "OnProfileChanged", "UpdateProfile")
-  --addon.db.RegisterCallback(self, "OnProfileCopied", "UpdateProfile")
-  --addon.db.RegisterCallback(self, "OnProfileReset", "UpdateProfile")
+  addon.db.RegisterCallback(self, "OnProfileChanged", "UpdateProfile")
+  addon.db.RegisterCallback(self, "OnProfileCopied", "UpdateProfile")
+  addon.db.RegisterCallback(self, "OnProfileReset", "UpdateProfile")
 
   --Create the Dialogs
   --addon:CreateDialogs()
@@ -36,6 +36,7 @@ function addon:OnInitialize()
 
   --addon:UpdateIcon()
   --addon:ScheduleUpdate()
+  addon:UpdateGuildMemberInfoCache()
 end
 
 function addon:OnEnable()
@@ -48,6 +49,9 @@ function addon:OnEnable()
 end
 
 function addon:OnDisable()
+end
+
+function addon:UpdateProfile()
 end
 --[[
      ########################################################################

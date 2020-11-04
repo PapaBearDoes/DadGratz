@@ -17,13 +17,30 @@ local L = addon:GetLocale()
 --   ## Do All The Things!!!
 function addon:UpdateGuildInfo()
   local numTotalGuildMembers, numOnlineGuildMembers, numOnlineAndMobileMembers = GetNumGuildMembers();
-  DG_globals.guildMembers.total = numTotalGuildMembers
-  DG_globals.guildMembers.numOnline = numOnlineGuildMembers
+  DG_globals.numGuildMembers.total = numTotalGuildMembers
+  DG_globals.numGuildMembers.numOnline = numOnlineGuildMembers
 end
 
-function addon:UpdateGuildMemberInfo()
+function addon:UpdateGuildMemberInfoCache()
+  addon:UpdateGuildInfo()
+  local i = 1
+  while i < DG_globals.numGuildMembers.total do
+    local name, rank, rankIndex, level, class, zone, note, officernote, online, status, classFileName, achievementPoints, achievementRank, isMobile, isSoREligible, standingID = GetGuildRosterInfo(i);
+    DG_globals.guildMembers[i]["cache"] = {
+      ["name"] = name,
+      ["level"] = level,
+      ["class"] = class,
+      ["online"] = online,
+    }
+    i = i + 1
+  end
+  addon:LevelCheck()
+end
+
+function addon:LevelCheck()
+  addon:UpdateGuildInfo()
   local i = 0
-  while(i < DG_globals.guildMembers.numOnline) do
+  while i < DG_globals.numGuildMembers.numOnline do
     i = i + 1
     local name, rank, rankIndex, level, class, zone, note, officernote, online, status, classFileName, achievementPoints, achievementRank, isMobile, isSoREligible, standingID = GetGuildRosterInfo(i);
     DG_globals.guildMembers[i] = {
@@ -32,9 +49,11 @@ function addon:UpdateGuildMemberInfo()
       ["class"] = class,
       ["online"] = online,
     }
-    
-
-  local
+    if DG_globals.guildMembers[i]["level"] > DG_globals.guildMembers[i]["cache"]["level"] then
+      DG_globals.guildMembers[i]["levelUp"] = true
+    end
+  end
+end
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@

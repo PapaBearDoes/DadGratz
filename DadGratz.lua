@@ -23,8 +23,12 @@ DG_globals = {
   jokesDark = {},
   jokesNSFW = {},
   triggerList = {
-    L["CHAT_MSG_GUILD_ACHIEVEMENT"] = "Guild Achievement",
-    L[""] = "",
+    --L["CHAT_MSG_GUILD_ACHIEVEMENT"] = "Guild Achievement",
+    --L[""] = "",
+  },
+  numGuildMembers = {},
+  guildMembers = {
+    {},
   },
 }
 
@@ -36,7 +40,7 @@ DG_dbDefaults = {
     autoRespond = true,
     autoResponseTriggers = {},
     jokesUser = {},
-  }
+  },
 }
 
 --Create config defaults
@@ -300,6 +304,9 @@ DG_options = {
     },
   },
 }
+if DLAPI then DLAPI.DebugLog("DG_Globals", DG_globals) end
+if DLAPI then DLAPI.DebugLog("DG_dbDefaults", DG_dbDefaults) end
+if DLAPI then DLAPI.DebugLog("DG_options", DG_options) end
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@

@@ -16,9 +16,9 @@ local L = addon:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-jokesNSFW = {
-  ["key"] = "value",
-},
+DG_globals.jokesNSFW = {
+--  ["key"] = "value",
+}
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@
