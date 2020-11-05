@@ -15,43 +15,30 @@ local L = addon:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-function addon:UpdateGuildInfo()
+function addon:UpdateGuild()
   local numTotalGuildMembers, numOnlineGuildMembers, numOnlineAndMobileMembers = GetNumGuildMembers();
-  DG_globals.numGuildMembers.total = numTotalGuildMembers
-  DG_globals.numGuildMembers.numOnline = numOnlineGuildMembers
-end
-
-function addon:UpdateGuildMemberInfoCache()
-  addon:UpdateGuildInfo()
-  local i = 1
-  while i < DG_globals.numGuildMembers.total do
+  i = 1
+  while i <= numTotalGuildMembers do
     local name, rank, rankIndex, level, class, zone, note, officernote, online, status, classFileName, achievementPoints, achievementRank, isMobile, isSoREligible, standingID = GetGuildRosterInfo(i);
-    DG_globals.guildMembers[i]["cache"] = {
-      ["name"] = name,
-      ["level"] = level,
-      ["class"] = class,
-      ["online"] = online,
-    }
-    i = i + 1
-  end
-  addon:LevelCheck()
-end
-
-function addon:LevelCheck()
-  addon:UpdateGuildInfo()
-  local i = 0
-  while i < DG_globals.numGuildMembers.numOnline do
-    i = i + 1
-    local name, rank, rankIndex, level, class, zone, note, officernote, online, status, classFileName, achievementPoints, achievementRank, isMobile, isSoREligible, standingID = GetGuildRosterInfo(i);
-    DG_globals.guildMembers[i] = {
-      ["name"] = name,
-      ["level"] = level,
-      ["class"] = class,
-      ["online"] = online,
-    }
-    if DG_globals.guildMembers[i]["level"] > DG_globals.guildMembers[i]["cache"]["level"] then
-      DG_globals.guildMembers[i]["levelUp"] = true
+      DG_globals.guild.cache[name] = {
+        ["level"] = level,
+        ["class"] = class,
+        ["online"] = online,
+      }
+    if online == true then
+      DG_globals.guild.member[name] = {
+        ["level"] = level,
+        ["class"] = class,
+        ["online"] = online,
+      }
+      if DG_globals.guild.member[name]["level"] > DG_globals.guild.cache[name]["level"] then
+        --DG_globals.guild.member[name]["levelUp"] = true
+        --[[
+        Fire a gratz if setting is set due to level up.
+        ]]
+      end
     end
+    i = i + 1
   end
 end
 --[[

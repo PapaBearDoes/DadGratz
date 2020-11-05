@@ -27,8 +27,9 @@ DG_globals = {
     --L[""] = "",
   },
   numGuildMembers = {},
-  guildMembers = {
-    {},
+  guild = {
+    member = {},
+    cache = {},
   },
 }
 

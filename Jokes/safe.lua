@@ -99,12 +99,12 @@ DG_globals.jokesSafe = {
   "Well done that one!",
   UnitName("player").. " like's your achievement, ".. UnitName("player").. " give you grats!",
   "GRATZAMONDO!!",
-  "Fantastic achievement! from your friendly nighbourhood ".. UnitName("player")
+  "Fantastic achievement! from your friendly nighbourhood ".. UnitName("player"),
   "Your efforts have not gone un-noticed, congratulations! :D",
   "The wisps of Moonglade chanted your name as you got THAT achievement!",
   "The clarity of your achievement echoes through the lands! well done!",
   "Do you chase waterfalls? rivers? lakes? That achievement has music written all over it!",
-  "Whose the tank?.... uh i mean CONGRATULATIONS! ... whats the mage?.... i dont know.... HE'S THE PRIEST!" -- look up 'whose the tank' on youtube!
+  "Whose the tank?.... uh i mean CONGRATULATIONS! ... whats the mage?.... i dont know.... HE'S THE PRIEST!",
   "Congrats on the Achievement! :)",
   "Like a rocket, that achievement soared! Great one!",
   "That achievement was like a bright firework, for all to see!",
@@ -129,7 +129,7 @@ DG_globals.jokesSafe = {
   "Wellius Dunnikus!",
   "Achievement Detected! Grats initiated! ... CONGRATS! :D",
   "oooOOOOoooooh NICE!",
-  "Achievement meet Grats, Grats meet Achievement! ... aww, look how good they are together!"
+  "Achievement meet Grats, Grats meet Achievement! ... aww, look how good they are together!",
   "THAT ROCKS... great achievement!!",
   "I say, what a lovely achievement you got! set it down over there with the rest of them, theres a good guildy. congrats btw! :D",
   "Gotta collect-em all!! .. no wait i mean well done!",

@@ -36,7 +36,7 @@ function addon:OnInitialize()
 
   --addon:UpdateIcon()
   --addon:ScheduleUpdate()
-  addon:UpdateGuildMemberInfoCache()
+  addon:UpdateGuild()
 end
 
 function addon:OnEnable()
