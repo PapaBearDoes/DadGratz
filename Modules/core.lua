@@ -17,7 +17,7 @@ local L = addon:GetLocale()
 --   ## Do All The Things!!!
 function addon:OnInitialize()
   --Fire up the DB
-  addon.db = LibStub("AceDB-3.0"):New(me, DG_dbDefaults, "Default")
+  addon.db = LibStub("AceDB-3.0"):New("DadGratzDB", DG_dbDefaults, "Default")
   if not addon.db then
     local errorDB = L["ErrorDB"]
     print(errorDB)

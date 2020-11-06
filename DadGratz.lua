@@ -22,10 +22,6 @@ DG_globals = {
   jokesQuestionable = {},
   jokesDark = {},
   jokesNSFW = {},
-  triggerList = {
-    --L["CHAT_MSG_GUILD_ACHIEVEMENT"] = "Guild Achievement",
-    --L[""] = "",
-  },
   numGuildMembers = {},
   guild = {
     member = {},
@@ -39,7 +35,12 @@ DG_globals = {
 DG_dbDefaults = {
   profile = {
     autoRespond = true,
-    autoResponseTriggers = {},
+    guildAchievement = true,
+    maxLevel = true,
+    levelUp = false,
+    levelUpSlider = 45,
+    responseDelay = 15,
+    mySlashCommand = "dg",
     jokesUser = {},
   },
 }
@@ -62,7 +63,6 @@ DG_options = {
           name = L["DisplayOptionsHeader"],
           type = "header",
         },
-        --displayOptions = {},
         -- Automatic or not
         autoRespondHeader = {
           order = 10,
@@ -74,23 +74,85 @@ DG_options = {
           name = L["AutoRespond"],
           desc = L["AutoRespondDesc"],
           type = "toggle",
+          width = "full",
           get = function()
             return addon.db.profile.autoRespond
           end,
           set = function (key, value)
             addon.db.profile.autoRespond = value
+            if not addon.db.profile.autoRespond then
+              addon.db.profile.guildAchievement = false
+              addon.db.profile.maxLevel = false
+              addon.db.profile.levelUp = false
+            end
           end,
         },
         -- What triggers a gratz
-        autoResponseTriggers = {
+        guildAchievement = {
           order = 12,
-          name = L["AutoResponseTriggers"],
-          desc = L["AutoResponseTriggersDesc"],
-          type = "multiselect",
-          values = DG_globals.triggers,
-          get = function(key, value)
+          name = L["GuildAchievement"],
+          desc = L["GuildAchievementDesc"],
+          type = "toggle",
+          width = "full",
+          get = function ()
+            return addon.db.profile.guildAchievement
           end,
-          set = function(key, value)
+          set = function (key, value)
+            addon.db.profile.guildAchievement = value
+          end,
+          disabled = function()
+            return (addon.db.profile.autoRespond == false)
+          end,
+        },
+        maxLevel = {
+          order = 13,
+          name = L["MaxLevel"],
+          desc = L["MaxLevelDesc"],
+          type = "toggle",
+          width = "full",
+          get = function ()
+            return addon.db.profile.maxLevel
+          end,
+          set = function (key, value)
+            addon.db.profile.maxLevel = value
+          end,
+          disabled = function()
+            return (addon.db.profile.autoRespond == false)
+          end,
+        },
+        levelUp = {
+          order = 14,
+          name = L["LevelUp"],
+          desc = L["LevelUpDesc"],
+          type = "toggle",
+          width = "full",
+          get = function ()
+            return addon.db.profile.levelUp
+          end,
+          set = function (key, value)
+            addon.db.profile.levelUp = value
+          end,
+          disabled = function()
+            return (addon.db.profile.autoRespond == false)
+          end,
+        },
+        levelUpSlider = {
+          order = 15,
+          name = L["LevelUpSlider"],
+          desc = L["LevelUpSliderDesc"],
+          type = "range",
+          min = 10,
+          max = 60,
+          step = 1,
+          width = "full",
+          get = function ()
+            return addon.db.profile.levelUpSlider
+          end,
+          set = function (key, value)
+            addon.db.profile.levelUpSlider = value
+          end,
+          disabled = function()
+            return (addon.db.profile.levelUp == false)
           end,
         },
         -- Which Jokes to have in the pool
@@ -162,17 +224,31 @@ DG_options = {
         -- Respond to slash command?
         delaysHeader = {
           order = 30,
-          name = L["delaysHeader"],
+          name = L["delayHeader"],
           type = "header",
         },
-        --responseDelay = {},
+        responseDelay = {
+          order = 31,
+          name = L["delay"],
+          desc = L["delayDesc"],
+          type = "range",
+          min = 1,
+          max = 180,
+          step = 1,
+          get = function()
+            return addon.db.profile.responseDelay
+          end,
+          set = function (key, value)
+            addon.db.profile.responseDelay = value
+          end
+        },
         -- Respond to slash command?
         slashCommandHeader = {
           order = 40,
           name = L["SlashCommandHeader"],
           type = "header",
         },
-        --slashCommand = {},
+        --mySlashCommand = {},
         -- Macro creation
         macroCreateHeader = {
           order = 50,
@@ -305,9 +381,6 @@ DG_options = {
     },
   },
 }
-if DLAPI then DLAPI.DebugLog("DG_Globals", DG_globals) end
-if DLAPI then DLAPI.DebugLog("DG_dbDefaults", DG_dbDefaults) end
-if DLAPI then DLAPI.DebugLog("DG_options", DG_options) end
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@

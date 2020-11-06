@@ -19,7 +19,7 @@ tinsert(DG_globals.enableTasks, function(self)
   DG_options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(addon.db)
   DG_options.args.profile.order = -2
 
-  LibStub("AceConfig-3.0"):RegisterOptionsTable(me, DG_options, nil)
+  LibStub("AceConfig-3.0"):RegisterOptionsTable(me, DG_options, {"/dadgratz", "/" .. addon.db.profile.mySlashCommand})
 
   local DG_Dialog = LibStub("AceConfigDialog-3.0")
   DG_optionFrames = {}
