@@ -59,7 +59,10 @@ L["jokesNSFWToggleDesc"] = "Use Not Safe For Work Gratz/Jokes"
 L["jokesUserToggle"] = "Mine"
 L["jokesUserToggleDesc"] = "Use My Gratz/Jokes"
 L["SlashCommandHeader"] = "Slash Command Options"
+L["MySlashCommand"] = "My Slash Command"
+L["MySlashCommandDesc"] = "What should we use as a slash command?\n(note: just the command, no slash.\nAlso, /dadgratz and /dg can also be used.)"
 L["MacroCreateHeader"] = "Macro Creation"
+L["CannotAccessOptionsDuringCombat"] = "Cannot Access Options During Combat!"
 --@end-do-not-package@
 
 --[[

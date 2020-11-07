@@ -40,7 +40,7 @@ DG_dbDefaults = {
     levelUp = false,
     levelUpSlider = 45,
     responseDelay = 15,
-    mySlashCommand = "dg",
+    mySlashCommand = "dgratz",
     jokesUser = {},
   },
 }
@@ -240,7 +240,7 @@ DG_options = {
           end,
           set = function (key, value)
             addon.db.profile.responseDelay = value
-          end
+          end,
         },
         -- Respond to slash command?
         slashCommandHeader = {
@@ -248,7 +248,18 @@ DG_options = {
           name = L["SlashCommandHeader"],
           type = "header",
         },
-        --mySlashCommand = {},
+        mySlashCommand = {
+          order = 41,
+          name = L["MySlashCommand"],
+          desc = L["MySlashCommandDesc"],
+          type = "input",
+          get = function()
+            return addon.db.profile.mySlashCommand
+          end,
+          set = function(key, value)
+            addon.db.profile.mySlashCommand = value
+          end,
+        },
         -- Macro creation
         macroCreateHeader = {
           order = 50,

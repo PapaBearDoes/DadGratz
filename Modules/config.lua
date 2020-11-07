@@ -19,7 +19,9 @@ tinsert(DG_globals.enableTasks, function(self)
   DG_options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(addon.db)
   DG_options.args.profile.order = -2
 
-  LibStub("AceConfig-3.0"):RegisterOptionsTable(me, DG_options, {"/dadgratz", "/" .. addon.db.profile.mySlashCommand})
+  addon:RegisterChatCommand(addon.db.profile.mySlashCommand, "slashCommand")
+
+  LibStub("AceConfig-3.0"):RegisterOptionsTable(me, DG_options, nil)
 
   local DG_Dialog = LibStub("AceConfigDialog-3.0")
   DG_optionFrames = {}
@@ -30,14 +32,32 @@ end)
 
 -- Config window --
 function addon:ShowConfig()
-	InterfaceOptionsFrame_OpenToCategory(DG_optionFrames.profile)
-  InterfaceOptionsFrame_OpenToCategory(DG_optionFrames.jokes)
+--	InterfaceOptionsFrame_OpenToCategory(DG_optionFrames.profile)
+--  InterfaceOptionsFrame_OpenToCategory(DG_optionFrames.jokes)
 	InterfaceOptionsFrame_OpenToCategory(DG_optionFrames.general)
 end
 -- End Options --
 
 function addon:UpdateOptions()
   LibStub("AceConfigRegistry-3.0"):NotifyChange(me)
+end
+
+function addon:slashCommand(input)
+  if InCombatLockdown() then
+    addon:Print(L["CannotAccessOptionsDuringCombat"])
+    return
+  end
+  if not input or input:trim() == "" then
+    addon:ShowConfig()
+  elseif input == "config" then
+    addon:ShowConfig()
+  elseif input == "gratz" then
+    --fire a gratz
+  end
+end
+
+function addon:gratz(list)
+  --random gratz from the set list given
 end
 --[[
      ########################################################################
