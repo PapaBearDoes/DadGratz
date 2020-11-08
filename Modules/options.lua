@@ -15,7 +15,19 @@ local L = addon:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-
+function addon:slashCommand(input)
+  if InCombatLockdown() then
+    addon:Print(L["CannotAccessOptionsDuringCombat"])
+    return
+  end
+  if not input or input:trim() == "" then
+    addon:ShowConfig()
+  elseif input == "config" then
+    addon:ShowConfig()
+  elseif input == "gratz" then
+    addon:Print("GratzFired!")
+  end
+end
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@

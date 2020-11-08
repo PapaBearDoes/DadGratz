@@ -32,32 +32,14 @@ end)
 
 -- Config window --
 function addon:ShowConfig()
---	InterfaceOptionsFrame_OpenToCategory(DG_optionFrames.profile)
---  InterfaceOptionsFrame_OpenToCategory(DG_optionFrames.jokes)
+	InterfaceOptionsFrame_OpenToCategory(DG_optionFrames.profile)
+  InterfaceOptionsFrame_OpenToCategory(DG_optionFrames.jokes)
 	InterfaceOptionsFrame_OpenToCategory(DG_optionFrames.general)
 end
 -- End Options --
 
 function addon:UpdateOptions()
   LibStub("AceConfigRegistry-3.0"):NotifyChange(me)
-end
-
-function addon:slashCommand(input)
-  if InCombatLockdown() then
-    addon:Print(L["CannotAccessOptionsDuringCombat"])
-    return
-  end
-  if not input or input:trim() == "" then
-    addon:ShowConfig()
-  elseif input == "config" then
-    addon:ShowConfig()
-  elseif input == "gratz" then
-    --fire a gratz
-  end
-end
-
-function addon:gratz(list)
-  --random gratz from the set list given
 end
 --[[
      ########################################################################

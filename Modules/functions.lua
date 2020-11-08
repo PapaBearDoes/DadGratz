@@ -15,6 +15,10 @@ local L = addon:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
+function addon:gratz()
+  --sdf
+end
+
 function addon:UpdateGuild()
   local numTotalGuildMembers, numOnlineGuildMembers, numOnlineAndMobileMembers = GetNumGuildMembers();
   i = 1

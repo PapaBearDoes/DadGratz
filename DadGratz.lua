@@ -41,7 +41,12 @@ DG_dbDefaults = {
     levelUpSlider = 45,
     responseDelay = 15,
     mySlashCommand = "dgratz",
-    jokesUser = {},
+    jokesSafe = true,
+    jokesQuestionable = true,
+    jokesDark = true,
+    jokesNSFW = true,
+    jokesUser = false,
+    userJokes = {},
   },
 }
 
@@ -161,64 +166,64 @@ DG_options = {
           name = L["JokeTypesHeader"],
           type = "header",
         },
-        jokeSafeToggle = {
+        jokesSafe = {
           order = 21,
-          name = L["jokesSafeToggle"],
-          desc = L["jokesSafeToggleDesc"],
+          name = L["jokesSafe"],
+          desc = L["jokesSafeDesc"],
           type = "toggle",
           get = function()
-            return addon.db.profile.jokeSafeToggle
+            return addon.db.profile.jokesSafe
           end,
           set = function (key, value)
-            addon.db.profile.jokeSafeToggle = value
+            addon.db.profile.jokesSafe = value
           end,
         },
-        jokeQuestionableSafeToggle = {
+        jokesQuestionable = {
           order = 22,
-          name = L["jokesQuestionableToggle"],
-          desc = L["jokesQuestionableToggleDesc"],
+          name = L["jokesQuestionable"],
+          desc = L["jokesQuestionableDesc"],
           type = "toggle",
           get = function()
-            return addon.db.profile.jokeQuestionableToggle
+            return addon.db.profile.jokesQuestionable
           end,
           set = function (key, value)
-            addon.db.profile.jokeQuestionableToggle = value
+            addon.db.profile.jokesQuestionable = value
           end,
         },
-        jokeDarkToggle = {
+        jokesDark = {
           order = 23,
-          name = L["jokesDarkToggle"],
-          desc = L["jokesDarkToggleDesc"],
+          name = L["jokesDark"],
+          desc = L["jokesDarkDesc"],
           type = "toggle",
           get = function()
-            return addon.db.profile.jokeDarkToggle
+            return addon.db.profile.jokeDark
           end,
           set = function (key, value)
-            addon.db.profile.jokeDarkToggle = value
+            addon.db.profile.jokeDark = value
           end,
         },
-        jokeNSFWToggle = {
+        jokesNSFW = {
           order = 24,
-          name = L["jokesNSFWToggle"],
-          desc = L["jokesNSFWToggleDesc"],
+          name = L["jokesNSFW"],
+          desc = L["jokesNSFWDesc"],
           type = "toggle",
           get = function()
-            return addon.db.profile.jokeNSFWToggle
+            return addon.db.profile.jokeNSFW
           end,
           set = function (key, value)
-            addon.db.profile.jokeNSFWToggle = value
+            addon.db.profile.jokeNSFW = value
           end,
         },
-        jokeUserToggle = {
+        jokesUser = {
           order = 25,
-          name = L["jokesUserToggle"],
-          desc = L["jokesUserToggleDesc"],
+          name = L["jokesUser"],
+          desc = L["jokesUserDesc"],
           type = "toggle",
           get = function()
-            return addon.db.profile.jokeUserToggle
+            return addon.db.profile.jokeUser
           end,
           set = function (key, value)
-            addon.db.profile.jokeUserToggle = value
+            addon.db.profile.jokeUser = value
           end,
         },
         -- Respond to slash command?
@@ -278,6 +283,7 @@ DG_options = {
         safeJokes = {
           order = 1,
           name = L["Safe"],
+          desc = L["SafeSelectDesc"],
           type = "group",
           args = {
             headerSafe = {
@@ -288,9 +294,22 @@ DG_options = {
             },
             jokesSafe = {
               order = 2,
-              name = ""--[[SafeJokesDB]],
               type = "description",
               width = "full",
+              fontSize = "medium",
+              name = function()
+                if not DG_globals.jokesSafe then
+                  local jokes = "empty"
+                  return jokes
+                else
+                  local jokes = ""
+                  for i, v in pairs(DG_globals.jokesSafe) do
+                    local joke = i .. ": " .. v .. "\n\n"
+                    jokes = jokes .. joke
+                  end
+                  return jokes
+                end
+              end,
             },
           },
         },
@@ -307,9 +326,22 @@ DG_options = {
             },
             jokesQuestionable = {
               order = 2,
-              name = ""--[[QuestionableJokesDB]],
               type = "description",
               width = "full",
+              fontSize = "medium",
+              name = function()
+                if not DG_globals.jokesQuestionable then
+                  local jokes = "empty"
+                  return jokes
+                else
+                  local jokes = ""
+                  for i, v in pairs(DG_globals.jokesQuestionable) do
+                    local joke = i .. ": " .. v .. "\n\n"
+                    jokes = jokes .. joke
+                  end
+                  return jokes
+                end
+              end,
             },
           },
         },
@@ -326,14 +358,27 @@ DG_options = {
             },
             jokesDark = {
               order = 2,
-              name = ""--[[DarkJokesDB]],
               type = "description",
               width = "full",
+              fontSize = "medium",
+              name = function()
+                if not DG_globals.jokesDark then
+                  local jokes = "empty"
+                  return jokes
+                else
+                  local jokes = ""
+                  for i, v in pairs(DG_globals.jokesDark) do
+                    local joke = i .. ": " .. v .. "\n\n"
+                    jokes = jokes .. joke
+                  end
+                  return jokes
+                end
+              end,
             },
           },
         },
         NSFWJokes = {
-          order = 3,
+          order = 4,
           name = L["NSFW"],
           type = "group",
           args = {
@@ -345,14 +390,27 @@ DG_options = {
             },
             jokesNSFW = {
               order = 2,
-              name = ""--[[NSFWJokesDB]],
               type = "description",
               width = "full",
+              fontSize = "medium",
+              name = function()
+                if not DG_globals.jokesNSFW then
+                  local jokes = "empty"
+                  return jokes
+                else
+                  local jokes = ""
+                  for i, v in pairs(DG_globals.jokesNSFW) do
+                    local joke = i .. ": " .. v .. "\n\n"
+                    jokes = jokes .. joke
+                  end
+                  return jokes
+                end
+              end,
             },
           },
         },
         UserJokes = {
-          order = 4,
+          order = 5,
           name = L["Mine"],
           type = "group",
           args = {
@@ -362,11 +420,24 @@ DG_options = {
               type = "header",
               width = "full",
             },
-            userNSFW = {
+            userJokes = {
               order = 2,
-              name = ""--[[UserJokesDB]],
               type = "description",
               width = "full",
+              fontSize = "medium",
+              name = function()
+                if not addon.db.profile.userJokes then
+                  local jokes = "empty"
+                  return jokes
+                else
+                  local jokes = ""
+                  for i, v in pairs(addon.db.profile.userJokes) do
+                    local joke = i .. ": " .. v .. "\n\n"
+                    jokes = jokes .. joke
+                  end
+                  return jokes
+                end
+              end,
             },
             headerUser2 = {
               order = 3,
@@ -374,17 +445,25 @@ DG_options = {
               type = "header",
               width = "full",
             },
-            inputUser = {
+            userJokesAdd = {
               order = 4,
-              name = L["AddNewUserJokeInput"],
+              name = L["userJokesAdd"],
+              desc = L["userJokesAddDesc"],
               type = "input",
-              width = .75,
-            },
-            buttonUser = {
-              order = 5,
-              name = L["AddNewUserJokeButton"],
-              type = "execute",
-              func = ""--[[function call]],
+              width = "full",
+              set = function(value)
+                local n = 0
+                if not addon.db.profile.userJokes then
+                  n = 1
+                else
+                  for _ in pairs(addon.db.profile.userJokes) do
+                    n = n + 1
+                  end
+                  n = n + 1
+                end
+                addon:Print(n .. "\n\n")
+                addon.db.profile.userJokes[n] = value
+              end,
             },
           },
         },
