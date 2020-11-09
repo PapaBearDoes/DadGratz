@@ -17,7 +17,7 @@ local L = addon:GetLocale()
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
 DG_globals.jokesDark = {
-  --"Dark Joke",
+  "That Achievement is like food, %s. Not everyone gets it.",
 }
 --[[
      ########################################################################

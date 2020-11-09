@@ -42,10 +42,11 @@ DG_dbDefaults = {
     responseDelay = 15,
     mySlashCommand = "dgratz",
     jokesSafe = true,
-    jokesQuestionable = true,
-    jokesDark = true,
-    jokesNSFW = true,
+    jokesQuestionable = false,
+    jokesDark = false,
+    jokesNSFW = false,
     jokesUser = false,
+    guildMemberName = "Guild Mate",
     myJokes = {},
   },
 }
@@ -178,7 +179,7 @@ DG_options = {
             addon.db.profile.jokesSafe = value
           end,
         },
-        jokesQuestionable = {
+        --[[jokesQuestionable = {
           order = 22,
           name = L["jokesQuestionable"],
           desc = L["jokesQuestionableDesc"],
@@ -189,8 +190,8 @@ DG_options = {
           set = function (key, value)
             addon.db.profile.jokesQuestionable = value
           end,
-        },
-        jokesDark = {
+        },]]--
+        --[[jokesDark = {
           order = 23,
           name = L["jokesDark"],
           desc = L["jokesDarkDesc"],
@@ -201,8 +202,8 @@ DG_options = {
           set = function (key, value)
             addon.db.profile.jokeDark = value
           end,
-        },
-        jokesNSFW = {
+        },]]--
+        --[[jokesNSFW = {
           order = 24,
           name = L["jokesNSFW"],
           desc = L["jokesNSFWDesc"],
@@ -213,8 +214,8 @@ DG_options = {
           set = function (key, value)
             addon.db.profile.jokeNSFW = value
           end,
-        },
-        jokesUser = {
+        },]]--
+        --[[jokesUser = {
           order = 25,
           name = L["jokesUser"],
           desc = L["jokesUserDesc"],
@@ -224,6 +225,19 @@ DG_options = {
           end,
           set = function (key, value)
             addon.db.profile.jokeUser = value
+          end,
+        },]]--
+        guildMemberName = {
+          order = 26,
+          name = L["GuildMemberName"],
+          desc = L["GuildMemberNameDesc"],
+          type = "input",
+          width = "full",
+          get = function()
+            return addon.db.profile.guildMemberName
+          end,
+          set = function(key, value)
+            addon.db.profile.guildMemberName = value
           end,
         },
         -- Respond to slash command?
@@ -308,7 +322,7 @@ DG_options = {
             },
           },
         },
-        questionableJokes = {
+        --[[questionableJokes = {
           order = 2,
           name = L["Questionable"],
           type = "group",
@@ -339,8 +353,8 @@ DG_options = {
               end,
             },
           },
-        },
-        darkJokes = {
+        },]]--
+        --[[darkJokes = {
           order = 3,
           name = L["Dark"],
           type = "group",
@@ -371,8 +385,8 @@ DG_options = {
               end,
             },
           },
-        },
-        NSFWJokes = {
+        },]]--
+        --[[NSFWJokes = {
           order = 4,
           name = L["NSFW"],
           type = "group",
@@ -403,7 +417,7 @@ DG_options = {
               end,
             },
           },
-        },
+        },]]--
         --[[UserJokes = {
           order = 5,
           name = L["Mine"],

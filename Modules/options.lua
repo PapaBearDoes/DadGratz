@@ -20,12 +20,25 @@ function addon:slashCommand(input)
     addon:Print(L["CannotAccessOptionsDuringCombat"])
     return
   end
-  if not input or input:trim() == "" then
-    addon:ShowConfig()
+  if not input or input:trim() == "" or input == "help" then
+    addon:Print("===== DadGratz =====")
+    addon:Print("\n")
+    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. "\" or \n")
+    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. " help\": This message")
+    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. " config\": Brings up the configuration screen.")
+    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. " gratz\": Fire off a random Gratz based on your settings.")
+    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. " macro\": Create a macro you can place on your actionbars for quick access Gratz.")
   elseif input == "config" then
     addon:ShowConfig()
   elseif input == "gratz" then
+    addon:FireGratz(addon.db.profile.guildMemberName)
+    --@do-not-package@
     addon:Print("GratzFired!")
+    --@end-do-not-package@
+  elseif input == "macro" then
+    --@do-not-package@
+    addon:Print("CreateMacro")
+    --@end-do-not-package@
   end
 end
 --[[

@@ -32,7 +32,7 @@ function addon:OnInitialize()
   --addon:CreateDialogs()
 
   --Register events
-  --addon:RegisterEvent("PLAYER_DEAD", "ScheduleUpdate")
+  addon:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT", "CheevoReceived")
 
   --addon:UpdateIcon()
   --addon:ScheduleUpdate()
@@ -46,6 +46,7 @@ function addon:OnEnable()
   DG_globals.enableTasks = nil
 
   --addon:ScheduleRepeatingTimer("MainUpdate", 1)
+  --addon:CheevoReceived("CHAT_MSG_GUILD_ACHIEVEMENT", "this is a test cheevo", "Jabouty", "Common")
 end
 
 function addon:OnDisable()
