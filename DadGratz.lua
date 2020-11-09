@@ -46,7 +46,7 @@ DG_dbDefaults = {
     jokesDark = true,
     jokesNSFW = true,
     jokesUser = false,
-    userJokes = {},
+    myJokes = {},
   },
 }
 
@@ -298,17 +298,12 @@ DG_options = {
               width = "full",
               fontSize = "medium",
               name = function()
-                if not DG_globals.jokesSafe then
-                  local jokes = "empty"
-                  return jokes
-                else
-                  local jokes = ""
-                  for i, v in pairs(DG_globals.jokesSafe) do
-                    local joke = i .. ": " .. v .. "\n\n"
-                    jokes = jokes .. joke
-                  end
-                  return jokes
+                local jokes = ""
+                for i, v in ipairs(DG_globals.jokesSafe) do
+                  local joke = v .. "\n\n"
+                  jokes = jokes .. joke
                 end
+                return jokes
               end,
             },
           },
@@ -330,13 +325,13 @@ DG_options = {
               width = "full",
               fontSize = "medium",
               name = function()
-                if not DG_globals.jokesQuestionable then
-                  local jokes = "empty"
+                local jokes = ""
+                if not next(DG_globals["jokesQuestionable"]) then
+                  jokes = "empty"
                   return jokes
                 else
-                  local jokes = ""
-                  for i, v in pairs(DG_globals.jokesQuestionable) do
-                    local joke = i .. ": " .. v .. "\n\n"
+                  for i, v in ipairs(DG_globals.jokesQuestionable) do
+                    local joke = v .. "\n\n"
                     jokes = jokes .. joke
                   end
                   return jokes
@@ -362,13 +357,13 @@ DG_options = {
               width = "full",
               fontSize = "medium",
               name = function()
-                if not DG_globals.jokesDark then
-                  local jokes = "empty"
+                local jokes = ""
+                if not next(DG_globals["jokesDark"]) then
+                  jokes = "empty"
                   return jokes
                 else
-                  local jokes = ""
-                  for i, v in pairs(DG_globals.jokesDark) do
-                    local joke = i .. ": " .. v .. "\n\n"
+                  for i, v in ipairs(DG_globals.jokesDark) do
+                    local joke = v .. "\n\n"
                     jokes = jokes .. joke
                   end
                   return jokes
@@ -394,13 +389,13 @@ DG_options = {
               width = "full",
               fontSize = "medium",
               name = function()
-                if not DG_globals.jokesNSFW then
-                  local jokes = "empty"
+                local jokes = ""
+                if not next(DG_globals["jokesNSFW"]) then
+                  jokes = "empty"
                   return jokes
                 else
-                  local jokes = ""
-                  for i, v in pairs(DG_globals.jokesNSFW) do
-                    local joke = i .. ": " .. v .. "\n\n"
+                  for i, v in ipairs(DG_globals.jokesNSFW) do
+                    local joke = v .. "\n\n"
                     jokes = jokes .. joke
                   end
                   return jokes
@@ -409,7 +404,7 @@ DG_options = {
             },
           },
         },
-        UserJokes = {
+        --[[UserJokes = {
           order = 5,
           name = L["Mine"],
           type = "group",
@@ -426,13 +421,13 @@ DG_options = {
               width = "full",
               fontSize = "medium",
               name = function()
-                if not addon.db.profile.userJokes then
-                  local jokes = "empty"
+                local jokes = ""
+                if not next(addon.db.profile["myJokes"]) then
+                  jokes = "empty"
                   return jokes
                 else
-                  local jokes = ""
-                  for i, v in pairs(addon.db.profile.userJokes) do
-                    local joke = i .. ": " .. v .. "\n\n"
+                  for i, v in ipairs(addon.db.profile.myJokes) do
+                    local joke = v .. "\n\n"
                     jokes = jokes .. joke
                   end
                   return jokes
@@ -451,22 +446,14 @@ DG_options = {
               desc = L["userJokesAddDesc"],
               type = "input",
               width = "full",
-              set = function(value)
-                local n = 0
-                if not addon.db.profile.userJokes then
-                  n = 1
-                else
-                  for _ in pairs(addon.db.profile.userJokes) do
-                    n = n + 1
-                  end
-                  n = n + 1
-                end
-                addon:Print(n .. "\n\n")
-                addon.db.profile.userJokes[n] = value
+              set = function(info, value)
+                n = getn(addon.db.profile["myJokes"])
+                n = n + 1
+                addon.db.profile["myJokes"][n] = value
               end,
             },
           },
-        },
+        },]]--
       },
     },
   },

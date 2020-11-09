@@ -17,7 +17,7 @@ local L = addon:GetLocale()
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
 DG_globals.jokesQuestionable = {
-  "Questionable Joke",
+  --"Questionable Joke",
 }
 --[[
      ########################################################################
