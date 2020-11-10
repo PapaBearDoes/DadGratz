@@ -19,6 +19,8 @@ local L = addon:GetLocale()
 DG_globals = {
   enableTasks = {},
   jokesSafe = {},
+  jokesDad = {},
+  jokesPuns = {},
   jokesQuestionable = {},
   jokesDark = {},
   jokesNSFW = {},
@@ -39,9 +41,12 @@ DG_dbDefaults = {
     maxLevel = true,
     levelUp = false,
     levelUpSlider = 45,
-    responseDelay = 15,
+    responseDelayMin = 5,
+    responseDelayMax = 25,
     mySlashCommand = "dgratz",
     jokesSafe = true,
+    jokesDad = true,
+    jokesPuns = true,
     jokesQuestionable = false,
     jokesDark = false,
     jokesNSFW = false,
@@ -179,8 +184,32 @@ DG_options = {
             addon.db.profile.jokesSafe = value
           end,
         },
-        --[[jokesQuestionable = {
+        jokesDad = {
           order = 22,
+          name = L["jokesDad"],
+          desc = L["jokesDadDesc"],
+          type = "toggle",
+          get = function()
+            return addon.db.profile.jokesDad
+          end,
+          set = function (key, value)
+            addon.db.profile.jokesDad = value
+          end,
+        },
+        jokesPuns = {
+          order = 22,
+          name = L["jokesPuns"],
+          desc = L["jokesPunsDesc"],
+          type = "toggle",
+          get = function()
+            return addon.db.profile.jokesPuns
+          end,
+          set = function (key, value)
+            addon.db.profile.jokesPuns = value
+          end,
+        },
+        --[[jokesQuestionable = {
+          order = 23,
           name = L["jokesQuestionable"],
           desc = L["jokesQuestionableDesc"],
           type = "toggle",
@@ -191,20 +220,20 @@ DG_options = {
             addon.db.profile.jokesQuestionable = value
           end,
         },]]--
-        --[[jokesDark = {
-          order = 23,
+        jokesDark = {
+          order = 24,
           name = L["jokesDark"],
           desc = L["jokesDarkDesc"],
           type = "toggle",
           get = function()
-            return addon.db.profile.jokeDark
+            return addon.db.profile.jokesDark
           end,
           set = function (key, value)
-            addon.db.profile.jokeDark = value
+            addon.db.profile.jokesDark = value
           end,
-        },]]--
+        },
         --[[jokesNSFW = {
-          order = 24,
+          order = 25,
           name = L["jokesNSFW"],
           desc = L["jokesNSFWDesc"],
           type = "toggle",
@@ -216,19 +245,19 @@ DG_options = {
           end,
         },]]--
         --[[jokesUser = {
-          order = 25,
+          order = 26,
           name = L["jokesUser"],
           desc = L["jokesUserDesc"],
           type = "toggle",
           get = function()
-            return addon.db.profile.jokeUser
+            return addon.db.profile.jokesUser
           end,
           set = function (key, value)
-            addon.db.profile.jokeUser = value
+            addon.db.profile.jokesUser = value
           end,
         },]]--
         guildMemberName = {
-          order = 26,
+          order = 27,
           name = L["GuildMemberName"],
           desc = L["GuildMemberNameDesc"],
           type = "input",
@@ -246,19 +275,34 @@ DG_options = {
           name = L["delayHeader"],
           type = "header",
         },
-        responseDelay = {
+        responseDelayMin = {
           order = 31,
-          name = L["delay"],
+          name = L["delayMin"],
           desc = L["delayDesc"],
           type = "range",
-          min = 1,
+          min = 10,
           max = 180,
           step = 1,
           get = function()
-            return addon.db.profile.responseDelay
+            return addon.db.profile.responseDelayMin
           end,
           set = function (key, value)
-            addon.db.profile.responseDelay = value
+            addon.db.profile.responseDelayMin = value
+          end,
+        },
+        responseDelayMax = {
+          order = 32,
+          name = L["delayMax"],
+          desc = L["delayDesc"],
+          type = "range",
+          min = 10,
+          max = 180,
+          step = 1,
+          get = function()
+            return addon.db.profile.responseDelayMax
+          end,
+          set = function (key, value)
+            addon.db.profile.responseDelayMax = value
           end,
         },
         -- Respond to slash command?
@@ -297,7 +341,6 @@ DG_options = {
         safeJokes = {
           order = 1,
           name = L["Safe"],
-          desc = L["SafeSelectDesc"],
           type = "group",
           args = {
             headerSafe = {
@@ -306,7 +349,7 @@ DG_options = {
               type = "header",
               width = "full",
             },
-            jokesSafe = {
+            jokesSafeList = {
               order = 2,
               type = "description",
               width = "full",
@@ -322,8 +365,62 @@ DG_options = {
             },
           },
         },
-        --[[questionableJokes = {
+        dadJokes = {
           order = 2,
+          name = L["Dad"],
+          type = "group",
+          args = {
+            headerDad = {
+              order = 1,
+              name = L["DadJokes"],
+              type = "header",
+              width = "full",
+            },
+            jokesDadList = {
+              order = 2,
+              type = "description",
+              width = "full",
+              fontSize = "medium",
+              name = function()
+                local jokes = ""
+                for i, v in ipairs(DG_globals.jokesDad) do
+                  local joke = v .. "\n\n"
+                  jokes = jokes .. joke
+                end
+                return jokes
+              end,
+            },
+          },
+        },
+        punsJokes = {
+          order = 2,
+          name = L["Puns"],
+          type = "group",
+          args = {
+            headerPuns = {
+              order = 1,
+              name = L["Puns"],
+              type = "header",
+              width = "full",
+            },
+            jokesPunsList = {
+              order = 2,
+              type = "description",
+              width = "full",
+              fontSize = "medium",
+              name = function()
+                local jokes = ""
+                for i, v in ipairs(DG_globals.jokesPuns) do
+                  local joke = v .. "\n\n"
+                  jokes = jokes .. joke
+                end
+                return jokes
+              end,
+            },
+          },
+        },
+        --[[questionableJokes = {
+          order = 3,
           name = L["Questionable"],
           type = "group",
           args = {
@@ -354,8 +451,8 @@ DG_options = {
             },
           },
         },]]--
-        --[[darkJokes = {
-          order = 3,
+        darkJokes = {
+          order = 4,
           name = L["Dark"],
           type = "group",
           args = {
@@ -385,9 +482,9 @@ DG_options = {
               end,
             },
           },
-        },]]--
+        },
         --[[NSFWJokes = {
-          order = 4,
+          order = 5,
           name = L["NSFW"],
           type = "group",
           args = {
@@ -419,7 +516,7 @@ DG_options = {
           },
         },]]--
         --[[UserJokes = {
-          order = 5,
+          order = 6,
           name = L["Mine"],
           type = "group",
           args = {

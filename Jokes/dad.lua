@@ -11,36 +11,14 @@
 local _G = _G
 local me, ns = ...
 local addon = ns
+--local addon = LibStub("LibInit"):NewAddon(ns, me, true, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0")
 local L = addon:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-function addon:slashCommand(input)
-  if InCombatLockdown() then
-    addon:Print(L["CannotAccessOptionsDuringCombat"])
-    return
-  end
-  if not input or input:trim() == "" or input == "help" then
-    addon:Print("===== DadGratz =====")
-    addon:Print("\n")
-    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. "\" or \n")
-    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. " help\": This message")
-    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. " config\": Brings up the configuration screen.")
-    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. " gratz\": Fire off a random Gratz based on your settings.")
-    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. " macro\": Create a macro you can place on your actionbars for quick access Gratz.")
-  elseif input == "config" then
-    addon:ShowConfig()
-  elseif input == "gratz" then
-    addon:ScheduleTimer("FireGratz", random(addon.db.profile.responseDelayMin, addon.db.profile.responseDelayMax), addon.db.profile.guildMemberName)
-    --@do-not-package@
-    addon:Print("GratzFired!")
-    --@end-do-not-package@
-  elseif input == "macro" then
-    --@do-not-package@
-    addon:Print("CreateMacro")
-    --@end-do-not-package@
-  end
-end
+DG_globals.jokesDad = {
+  "%s, Your mom thinks it's great you went to college for this.", -- Nerdcore/Morag
+}
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@
