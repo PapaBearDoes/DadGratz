@@ -18,6 +18,7 @@ local L = addon:GetLocale()
 --   ## Do All The Things!!!
 DG_globals.jokesDad = {
   "%s, Your mom thinks it's great you went to college for this.", -- Nerdcore/Morag
+  "An achievement walks into a box... THE CHATBOX! congrats!",
 }
 --[[
      ########################################################################

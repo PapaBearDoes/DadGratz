@@ -24,6 +24,7 @@ DG_globals.jokesPuns = {
   "Not even Deathwing would argue that achievement, %s! Congrats!",
   "The wisps of Moonglade chanted '%s!' as they got THAT achievement!",
   "All the critters in the area are celebrating that achievement, %s, as are we!",
+  "Unlike that achievement, %s, most top-end raid groups stink... Mostly because they never wipe.",
 }
 --[[
      ########################################################################
