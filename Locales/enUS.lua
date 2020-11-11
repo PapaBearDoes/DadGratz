@@ -20,6 +20,12 @@ if not L then return end
 --@localization(locale="enUS", format="lua_additive_table")@
 
 --@do-not-package@
+L["Addon"] = "DadGratz"
+L["LDB_Text"] = "Congratulations!"
+L["LeftClick"] = "Left Click"
+L["LeftToolTip"] = "to fire off a random Gratz."
+L["RightClick"] = "Right Click"
+L["RightToolTip"] = "to open the options menu."
 L["GeneralSettings"] = "General Settings"
 L["Jokes"] = "All Gratz/Jokes"
 L["Safe"] = "Safe"

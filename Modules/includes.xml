@@ -13,6 +13,7 @@
 	<Script file="core.lua"/>
 	<Script file="events.lua"/>
 	<Script file="functions.lua"/>
+	<Script file="databroker.lua"/>
 </Ui>
 <!--
 ########################################################################

@@ -17,7 +17,7 @@ local L = addon:GetLocale()
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
 DG_globals.jokesNSFW = {
-  --"NSFW Joke",
+  "That achievement reminds me of your ass, %s ... Nice!", --Argorosh
 }
 --[[
      ########################################################################

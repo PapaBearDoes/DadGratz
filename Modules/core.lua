@@ -34,7 +34,6 @@ function addon:OnInitialize()
   --Register events
   addon:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT", "CheevoReceived")
 
-  --addon:UpdateIcon()
   --addon:ScheduleUpdate()
   addon:UpdateGuild()
 end
@@ -45,8 +44,6 @@ function addon:OnEnable()
   end
   DG_globals.enableTasks = nil
 
-  --addon:ScheduleRepeatingTimer("MainUpdate", 1)
-  --addon:CheevoReceived("CHAT_MSG_GUILD_ACHIEVEMENT", "this is a test cheevo", "Jabouty", "Common")
 end
 
 function addon:OnDisable()
