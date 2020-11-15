@@ -11,40 +11,51 @@
 local _G = _G
 local me, ns = ...
 local DadGratz = ns
+--local DadGratz = LibStub("LibInit"):NewAddon(ns, me, true, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0")
 local L = DadGratz:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
--- Do LDB stuff --
-local DadGratz_LDB = LibStub("LibDataBroker-1.1"):NewDataObject(me, {
-  type = "data source",
-  label = L["Addon"],
-  text = L["LDB_Text"],
-  icon = "Interface\\Icons\\spell_animaardenweald_buff",
-  --iconCoords = repairIconCoords,
-  OnClick = function(frame, click)
-    if click == "RightButton" then
-      DadGratz:ShowConfig()
-    elseif click == "LeftButton" then
-      DadGratz:Print("Gratz Fired, please wait!")
-      DadGratz:ScheduleTimer("FireGratz", random(DadGratz.db.profile.responseDelayMin, DadGratz.db.profile.responseDelayMax), DadGratz.db.profile.guildMemberName)
-    end
-  end,
-  OnTooltipShow = function(tooltip)
-    if not tooltip or not tooltip.AddLine then
-      return
-    end
+-- Define Globals
+DadGratz.globals = {
+  enableTasks = {},
+  jokesSafe = {},
+  jokesDad = {},
+  jokesPuns = {},
+  jokesQuestionable = {},
+  jokesDark = {},
+  jokesNSFW = {},
+  numGuildMembers = {},
+  guild = {
+    member = {},
+    cache = {},
+  },
+}
 
-    tooltip:AddLine(L["Addon"] .. " " .. GetAddOnMetadata(me, "Version"))
-    tooltip:AddLine(" ")
+-- Create any required hidden frames
 
-    tooltip:AddLine(" ")
-    tooltip:AddLine(DadGratz:Colorize(L["LeftClick"] .. " ", "eda55f") .. L["LeftToolTip"])
-    tooltip:AddLine(DadGratz:Colorize(L["RightClick"] .. " ", "eda55f") .. L["RightToolTip"])
-  end,
-})
--- End LDB stuff --
-
+-- Create DB defaults
+DadGratz.dbDefaults = {
+  profile = {
+    autoRespond = true,
+    guildAchievement = true,
+    maxLevel = true,
+    levelUp = false,
+    levelUpSlider = 45,
+    responseDelayMin = 5,
+    responseDelayMax = 25,
+    mySlashCommand = "dgratz",
+    jokesSafe = true,
+    jokesDad = true,
+    jokesPuns = true,
+    jokesQuestionable = false,
+    jokesDark = false,
+    jokesNSFW = false,
+    jokesUser = false,
+    guildMemberName = "Guild Mate",
+    myJokes = {},
+  },
+}
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@

@@ -10,34 +10,34 @@
 -- Imports
 local _G = _G
 local me, ns = ...
-local addon = ns
-local L = addon:GetLocale()
+local DadGratz = ns
+local L = DadGratz:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-function addon:slashCommand(input)
+function DadGratz:slashCommand(input)
   if InCombatLockdown() then
-    addon:Print(L["CannotAccessOptionsDuringCombat"])
+    DadGratz:Print(L["CannotAccessOptionsDuringCombat"])
     return
   end
   if not input or input:trim() == "" or input == "help" then
-    addon:Print("===== DadGratz =====")
-    addon:Print("\n")
-    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. "\" or \n")
-    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. " help\": This message")
-    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. " config\": Brings up the configuration screen.")
-    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. " gratz\": Fire off a random Gratz based on your settings.")
-    addon:Print("\"/" .. addon.db.profile.mySlashCommand .. " macro\": Create a macro you can place on your actionbars for quick access Gratz.")
+    DadGratz:Print("===== DadGratz =====")
+    DadGratz:Print("\n")
+    DadGratz:Print("\"/" .. DadGratz.db.profile.mySlashCommand .. "\" or \n")
+    DadGratz:Print("\"/" .. DadGratz.db.profile.mySlashCommand .. " help\": This message")
+    DadGratz:Print("\"/" .. DadGratz.db.profile.mySlashCommand .. " config\": Brings up the configuration screen.")
+    DadGratz:Print("\"/" .. DadGratz.db.profile.mySlashCommand .. " gratz\": Fire off a random Gratz based on your settings.")
+    DadGratz:Print("\"/" .. DadGratz.db.profile.mySlashCommand .. " macro\": Create a macro you can place on your actionbars for quick access Gratz.")
   elseif input == "config" then
-    addon:ShowConfig()
+    DadGratz:ShowConfig()
   elseif input == "gratz" then
-    addon:ScheduleTimer("FireGratz", random(addon.db.profile.responseDelayMin, addon.db.profile.responseDelayMax), addon.db.profile.guildMemberName)
+    DadGratz:ScheduleTimer("FireGratz", random(DadGratz.db.profile.responseDelayMin, DadGratz.db.profile.responseDelayMax), DadGratz.db.profile.guildMemberName)
     --@do-not-package@
-    addon:Print("GratzFired!")
+    DadGratz:Print("GratzFired!")
     --@end-do-not-package@
   elseif input == "macro" then
     --@do-not-package@
-    addon:Print("CreateMacro")
+    DadGratz:Print("CreateMacro")
     --@end-do-not-package@
   end
 end

@@ -10,13 +10,13 @@
 -- Imports
 local _G = _G
 local me, ns = ...
-local addon = ns
---local addon = LibStub("LibInit"):NewAddon(ns, me, true, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0")
-local L = addon:GetLocale()
+local DadGratz = ns
+--local DadGratz = LibStub("LibInit"):NewAddon(ns, me, true, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0")
+local L = DadGratz:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-DG_globals.jokesNSFW = {
+DadGratz.globals.jokesNSFW = {
   "That achievement reminds me of your ass, %s ... Nice!", --Argorosh
   "Is that an achievement I see there, or are you just happy to see me, %s?", --Argorosh
 }
