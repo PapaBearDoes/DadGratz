@@ -16,7 +16,7 @@ local L = DadGratz:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-DadGratz.globals.jokesDad = {
+DG.globals.jokes.dad = {
   "%s, Your mom thinks it's great you went to college for this.", -- Nerdcore/Morag
   "An achievement walks into a box... THE CHATBOX! congrats!",
 }

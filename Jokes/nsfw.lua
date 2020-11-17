@@ -16,7 +16,7 @@ local L = DadGratz:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-DadGratz.globals.jokesNSFW = {
+DG.globals.jokes.nsfw = {
   "That achievement reminds me of your ass, %s ... Nice!", --Argorosh
   "Is that an achievement I see there, or are you just happy to see me, %s?", --Argorosh
 }

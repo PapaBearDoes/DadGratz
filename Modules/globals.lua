@@ -17,14 +17,18 @@ local L = DadGratz:GetLocale()
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
 -- Define Globals
-DadGratz.globals = {
+DG = {}
+DG.globals = {
   enableTasks = {},
-  jokesSafe = {},
-  jokesDad = {},
-  jokesPuns = {},
-  jokesQuestionable = {},
-  jokesDark = {},
-  jokesNSFW = {},
+  jokes = {
+    safe = {},
+    dad = {},
+    puns = {},
+    questionable = {},
+    dark = {},
+    nsfw = {},
+    welcome = {},
+  },
   numGuildMembers = {},
   guild = {
     member = {},
@@ -35,7 +39,7 @@ DadGratz.globals = {
 -- Create any required hidden frames
 
 -- Create DB defaults
-DadGratz.dbDefaults = {
+DG.dbDefaults = {
   profile = {
     autoRespond = true,
     guildAchievement = true,
@@ -52,6 +56,7 @@ DadGratz.dbDefaults = {
     jokesDark = false,
     jokesNSFW = false,
     jokesUser = false,
+    jokesWelcome = true,
     guildMemberName = "Guild Mate",
     myJokes = {},
   },

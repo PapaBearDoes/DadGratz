@@ -16,7 +16,7 @@ local L = DadGratz:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-DadGratz.globals.jokesSafe = {
+DG.globals.jokes.safe = {
   "Well, %s, that thar be a nice achievement you got there!",
   "Dude, %s, thats awesome!",
   "Magnifico, %s!",

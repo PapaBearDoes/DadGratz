@@ -44,11 +44,11 @@ Locales\locales.xml
 #Load Main Files
 DadGratz.lua
 
-#Load Jokes
-Jokes\jokes.xml
-
 #Load the rest
 Modules\includes.xml
+
+#Load Jokes
+Jokes\jokes.xml
 
 #Last Editted By: @file-author@ - @file-date-iso@
 #@file-revision@

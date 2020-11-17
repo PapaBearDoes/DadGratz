@@ -15,7 +15,7 @@ local L = DadGratz:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-DadGratz.options = {
+DG.options = {
   name = me,
   desc = "",
   type = "group",
@@ -57,8 +57,24 @@ DadGratz.options = {
           end,
         },
         -- What triggers a gratz
-        guildAchievement = {
+        welcome = {
           order = 12,
+          name = L["Welcome"],
+          desc = L["WelcomeDesc"],
+          type = "toggle",
+          width = "full",
+          get = function ()
+            return DadGratz.db.profile.welcome
+          end,
+          set = function (key, value)
+            DadGratz.db.profile.welcome = value
+          end,
+          disabled = function()
+            return (DadGratz.db.profile.autoRespond == false)
+          end,
+        },
+        guildAchievement = {
+          order = 13,
           name = L["GuildAchievement"],
           desc = L["GuildAchievementDesc"],
           type = "toggle",
@@ -74,7 +90,7 @@ DadGratz.options = {
           end,
         },
         maxLevel = {
-          order = 13,
+          order = 14,
           name = L["MaxLevel"],
           desc = L["MaxLevelDesc"],
           type = "toggle",
@@ -90,7 +106,7 @@ DadGratz.options = {
           end,
         },
         levelUp = {
-          order = 14,
+          order = 15,
           name = L["LevelUp"],
           desc = L["LevelUpDesc"],
           type = "toggle",
@@ -106,7 +122,7 @@ DadGratz.options = {
           end,
         },
         levelUpSlider = {
-          order = 15,
+          order = 16,
           name = L["LevelUpSlider"],
           desc = L["LevelUpSliderDesc"],
           type = "range",
@@ -314,7 +330,7 @@ DadGratz.options = {
               fontSize = "medium",
               name = function()
                 local jokes = ""
-                for i, v in ipairs(DadGratz.globals.jokesSafe) do
+                for i, v in ipairs(DG.globals.jokes.safe) do
                   local joke = v .. "\n\n"
                   jokes = jokes .. joke
                 end
@@ -341,7 +357,7 @@ DadGratz.options = {
               fontSize = "medium",
               name = function()
                 local jokes = ""
-                for i, v in ipairs(DadGratz.globals.jokesDad) do
+                for i, v in ipairs(DG.globals.jokes.dad) do
                   local joke = v .. "\n\n"
                   jokes = jokes .. joke
                 end
@@ -368,7 +384,7 @@ DadGratz.options = {
               fontSize = "medium",
               name = function()
                 local jokes = ""
-                for i, v in ipairs(DadGratz.globals.jokesPuns) do
+                for i, v in ipairs(DG.globals.jokes.puns) do
                   local joke = v .. "\n\n"
                   jokes = jokes .. joke
                 end
@@ -395,11 +411,11 @@ DadGratz.options = {
               fontSize = "medium",
               name = function()
                 local jokes = ""
-                if not next(DadGratz.globals["jokesQuestionable"]) then
+                if not next(DG.globals["jokesQuestionable"]) then
                   jokes = "empty"
                   return jokes
                 else
-                  for i, v in ipairs(DadGratz.globals.jokesQuestionable) do
+                  for i, v in ipairs(DG.globals.jokes.questionable) do
                     local joke = v .. "\n\n"
                     jokes = jokes .. joke
                   end
@@ -427,11 +443,11 @@ DadGratz.options = {
               fontSize = "medium",
               name = function()
                 local jokes = ""
-                if not next(DadGratz.globals["jokesDark"]) then
+                if not next(DG.globals["jokesDark"]) then
                   jokes = "empty"
                   return jokes
                 else
-                  for i, v in ipairs(DadGratz.globals.jokesDark) do
+                  for i, v in ipairs(DG.globals.jokes.dark) do
                     local joke = v .. "\n\n"
                     jokes = jokes .. joke
                   end
@@ -459,11 +475,11 @@ DadGratz.options = {
               fontSize = "medium",
               name = function()
                 local jokes = ""
-                if not next(DadGratz.globals["jokesNSFW"]) then
+                if not next(DG.globals["jokesNSFW"]) then
                   jokes = "empty"
                   return jokes
                 else
-                  for i, v in ipairs(DadGratz.globals.jokesNSFW) do
+                  for i, v in ipairs(DG.globals.jokes.nsfw) do
                     local joke = v .. "\n\n"
                     jokes = jokes .. joke
                   end
@@ -528,13 +544,13 @@ DadGratz.options = {
   },
 }
 
-tinsert(DadGratz.globals.enableTasks, function(self)
-  DadGratz.options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(DadGratz.db)
-  DadGratz.options.args.profile.order = -2
+tinsert(DG.globals.enableTasks, function(self)
+  DG.options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(DadGratz.db)
+  DG.options.args.profile.order = -2
 
   DadGratz:RegisterChatCommand(DadGratz.db.profile.mySlashCommand, "slashCommand")
 
-  LibStub("AceConfig-3.0"):RegisterOptionsTable(me, DadGratz.options, nil)
+  LibStub("AceConfig-3.0"):RegisterOptionsTable(me, DG.options, nil)
 
   local DadGratz_Dialog = LibStub("AceConfigDialog-3.0")
   DadGratz_optionFrames = {}

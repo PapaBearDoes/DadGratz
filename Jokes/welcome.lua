@@ -10,48 +10,15 @@
 -- Imports
 local _G = _G
 local me, ns = ...
-local DadGratz = LibStub("LibInit"):NewAddon(ns, me, true, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0")
+local DadGratz = ns
+--local DadGratz = LibStub("LibInit"):NewAddon(ns, me, true, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0")
 local L = DadGratz:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-function DadGratz:OnInitialize()
-  --Fire up the DB
-  DadGratz.db = LibStub("AceDB-3.0"):New("DadGratzDB", DG.dbDefaults, "Default")
-  if not DadGratz.db then
-    local errorDB = L["ErrorDB"]
-    print(errorDB)
-  end
-
-  --Register the Profile Callbacks
-  DadGratz.db.RegisterCallback(self, "OnProfileChanged", "UpdateProfile")
-  DadGratz.db.RegisterCallback(self, "OnProfileCopied", "UpdateProfile")
-  DadGratz.db.RegisterCallback(self, "OnProfileReset", "UpdateProfile")
-
-  --Create the Dialogs
-  --DadGratz:CreateDialogs()
-
-  --Register events
-  DadGratz:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT", "CheevoReceived")
-  DadGratz:RegisterEvent("CHAT_MSG_SYSTEM", "Welcome")
-
-  --DadGratz:ScheduleUpdate()
-  DadGratz:UpdateGuild()
-end
-
-function DadGratz:OnEnable()
-  for i, v in ipairs(DG.globals.enableTasks) do
-    v(self)
-  end
-  DG.globals.enableTasks = nil
-
-end
-
-function DadGratz:OnDisable()
-end
-
-function DadGratz:UpdateProfile()
-end
+DG.globals.jokes.welcome = {
+  "Good Day there %s!",
+}
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@

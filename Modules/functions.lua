@@ -20,19 +20,19 @@ function DadGratz:UpdateGuild()
   i = 1
   while i <= numTotalGuildMembers do
     local name, rank, rankIndex, level, class, zone, note, officernote, online, status, classFileName, achievementPoints, achievementRank, isMobile, isSoREligible, standingID = GetGuildRosterInfo(i);
-      DadGratz.globals.guild.cache[name] = {
+      DG.globals.guild.cache[name] = {
         ["level"] = level,
         ["class"] = class,
         ["online"] = online,
       }
     if online == true then
-      DadGratz.globals.guild.member[name] = {
+      DG.globals.guild.member[name] = {
         ["level"] = level,
         ["class"] = class,
         ["online"] = online,
       }
-      if DadGratz.globals.guild.member[name]["level"] > DadGratz.globals.guild.cache[name]["level"] then
-        --DadGratz.globals.guild.member[name]["levelUp"] = true
+      if DG.globals.guild.member[name]["level"] > DG.globals.guild.cache[name]["level"] then
+        --DG.globals.guild.member[name]["levelUp"] = true
         --[[
         Fire a gratz if setting is set due to level up.
         ]]

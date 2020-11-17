@@ -16,7 +16,7 @@ local L = DadGratz:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-DadGratz.globals.jokesDark = {
+DG.globals.jokes.dark = {
   "That Achievement is like food, %s. Not everyone gets it.",
   "You deserve congratulatory words for that, %s, but not a proclamation...",
   "Congratulations, %s! You've wanted a win for some time now.",
