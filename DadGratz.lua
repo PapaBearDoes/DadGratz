@@ -8,7 +8,6 @@
 -- step three: GUI setup
 local DG = select(2, ...)
 local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
-cheevoCount = 0
 
 DG.version = GetAddOnMetadata("DadGratz", "Version")
 
@@ -17,6 +16,7 @@ local DBdefaults = {
 	global = {
 		["AddonEnabled"] = true,
     ["LockOutTime"] = 5,
+    ["CheevoCount"] = 0,
     --minimapIcon
     minimap = {
       hide = false,
@@ -63,12 +63,11 @@ function DG:RegisterModule()
 end
 
 function DG:CHAT_MSG_GUILD(_,MSG,Auth)
-  DG:TriggeredEvent("Guild Message: " .. MSG,Auth,"Guild",false,cheevoCount)
+  DG:TriggeredEvent("Guild Message: " .. MSG,Auth,"Guild",true)
 end
 
 function DG:CHAT_MSG_GUILD_ACHIEVEMENT(_,MSG,Auth)
-  cheevoCount = cheevoCount + 1
-  DG:TriggeredEvent("Guild Cheevo: " .. MSG,Auth,"Guild",true,cheevoCount)
+  DG:TriggeredEvent("Guild Cheevo: " .. MSG,Auth,"Guild",true)
 end
 
 --[[

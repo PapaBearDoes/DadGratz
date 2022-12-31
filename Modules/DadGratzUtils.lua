@@ -25,14 +25,6 @@ function Util:StartsWith(String,Start)
    return string.sub(String,1,string.len(Start))==Start
 end
 
-function DG:TriggeredEvent(message, recipient, channel, cheevo, cheevoCount)
-  if cheevo == true then
-    Timer:ScheduleTimer("Util:Process", 5, message, recipient, channel, cheevo, cheevoCount)
-  else
-    Util:Process(message, recipient, channel, cheevo, cheevoCount)
-  end
-end
-
 function Util:SendMessage(message, recipient, channel)
   SendChatMessage(message, channel, "Common", recipient)
 end
