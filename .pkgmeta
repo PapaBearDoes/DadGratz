@@ -12,6 +12,8 @@ license-output: LICENSE
 
 ignore:
   - ToDo
+  - .git
+  - .gitattributes
 
 tools-used:
     - libdatabroker-1-1
