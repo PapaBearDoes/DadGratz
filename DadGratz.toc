@@ -1,0 +1,54 @@
+## Interface: 100002
+
+#Meta
+## Title: DadGratz
+## Author: PapaBearDoes
+## Notes: PapaBear's collection of Dad Joke congratulations.
+## Notes-deDE: #
+## Notes-enUS: PapaBear's collection of Dad Joke congratulations.
+## Notes-esES: #
+## Notes-esMX: #
+## Notes-frFR: #
+## Notes-itIT: #
+## Notes-koKR: #
+## Notes-ptBR: #
+## Notes-ptBR: #
+## Notes-zhCN: #
+## Notes-zhTW: #
+## Version: 1.0.0-alpha
+
+# X-Meta
+## X-Category: Guild, Achievements, Boss Encounters, Chat & Communications, Miscellaneous
+## X-License: All Rights Reserved: You are free to fork and modify on GitHub, please ask about anything else.
+## X-Website: https://github.com/PapaBearDoes/DadGratz
+## X-Curse-Project-ID: 415498
+
+# Functionality
+## SavedVariables: DadGratzSV
+
+# Load Libraries
+# MUST Load LibStub 1st, CallbackHandler 2nd, Locales 3rd.
+Libraries\LibStub\LibStub.lua
+Libraries\CallbackHandler-1.0\CallbackHandler-1.0.xml
+Libraries\AceLocale-3.0\AceLocale-3.0.xml
+# Load the Base Libraries
+Libraries\AceAddon-3.0\AceAddon-3.0.xml
+Libraries\AceConsole-3.0\AceConsole-3.0.xml
+Libraries\AceDB-3.0\AceDB-3.0.xml
+Libraries\AceDBOptions-3.0\AceDBOptions-3.0.xml
+Libraries\LibDataBroker-1.1\LibDataBroker-1.1.lua
+Libraries\LibDBIcon-1.0\LibDBIcon-1.0.lua
+# Load Addon Specific Libraries
+Libraries\AceConfig-3.0\AceConfig-3.0.xml
+Libraries\AceEvent-3.0\AceEvent-3.0.xml
+Libraries\AceGUI-3.0\AceGUI-3.0.xml
+Libraries\AceTimer-3.0\AceTimer-3.0.xml
+
+# Load Languages
+Locales\locales.xml
+
+# Load Modules
+Modules\modules.xml
+
+# Load Main file(s)
+DadGratz.lua
