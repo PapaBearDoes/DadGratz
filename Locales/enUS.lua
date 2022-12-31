@@ -139,3 +139,7 @@ L["gratzNice"] = {
 L["gratzNaughty"] = {
   "That's very good of you, %s. You're such a good player. Come sit by me and tell me all about it like the good player you are."
 }
+
+L["gratzDark"] = {
+  "This is a dark gratz."
+}

@@ -2,6 +2,7 @@ local DG = select(2, ...)
 local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
 
 local Util = DG:NewModule("Utils", "AceConsole-3.0")
+local Timer = DG:NewModule("Timer", "AceTimer-3.0")
 
 function Util:ConvertTime(Current, Past)
 	local Current = Current
@@ -24,8 +25,12 @@ function Util:StartsWith(String,Start)
    return string.sub(String,1,string.len(Start))==Start
 end
 
-function DG:TriggeredEvent(message, recipient, channel, cheevo)
-	Util:Process(message, recipient, channel, cheevo)
+function DG:TriggeredEvent(message, recipient, channel, cheevo, cheevoCount)
+  if cheevo == true then
+    Timer:ScheduleTimer("Util:Process", 5, message, recipient, channel, cheevo, cheevoCount)
+  else
+    Util:Process(message, recipient, channel, cheevo, cheevoCount)
+  end
 end
 
 function Util:SendMessage(message, recipient, channel)
