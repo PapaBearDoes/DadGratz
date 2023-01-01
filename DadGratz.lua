@@ -1,11 +1,3 @@
--- start over
--- step one: Basic Gratz Functionality
--- Things to Gratz:
--- -- Leveling -> Safe, Questionable, NSFW, Dark
--- -- Achievements -> Safe, Questionable, NSFW, Dark
--- -- Joke --> Safe, Questionable, NSFW, Dark
--- step two: Localizations
--- step three: GUI setup
 local DG = select(2, ...)
 local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
 
@@ -30,13 +22,13 @@ function DG:OnInitialize()
   DG:RegisterEvent("CHAT_MSG_GUILD")
   DG:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT")
   DG.LastRunDelayTime = 0
-  DG.AddonDelayCheck = 0
 
 	for moduleName, module in pairs(DG.modules) do
 		DG[moduleName] = module
 	end
 	DG:RegisterModule()
 
+  --[[
   --Make the LibDataBroker
   local DadGratzLDB = LibStub("LibDataBroker-1.1"):NewDataObject("DadGratzLDB", {
     type = "data source",
@@ -53,6 +45,7 @@ function DG:OnInitialize()
   --Make the MiniMap Button
   local DadGratzIcon = LibStub("LibDBIcon-1.0")
   DadGratzIcon:Register("DadGratz", DadGratzLDB, DG.db.global.minimap)
+  ]]
 end
 
 function DG:OnEnable()
@@ -63,12 +56,13 @@ function DG:RegisterModule()
 end
 
 function DG:CHAT_MSG_GUILD(_,MSG,Auth)
-  DG:TriggeredEvent("Guild Message: " .. MSG,Auth,"Guild",true)
+  DG:TriggeredEvent("Guild Message: " .. MSG,Auth,"Guild",false)
 end
 
 function DG:CHAT_MSG_GUILD_ACHIEVEMENT(_,MSG,Auth)
   DG:TriggeredEvent("Guild Cheevo: " .. MSG,Auth,"Guild",true)
 end
+
 
 --[[
 --GUI testing

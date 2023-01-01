@@ -4,13 +4,6 @@ local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
 local Util = DG:NewModule("Utils", "AceConsole-3.0")
 local Timer = DG:NewModule("Timer", "AceTimer-3.0")
 
-function Util:ConvertTime(Current, Past)
-	local Current = Current
-	local Past = Past
-	local Difference = (Current - Past)
-	return Difference
-end
-
 function Util:LastRunCheck()
 	local Current = time()
 	local Past = (DG.LastRunDelayTime + DG.db.global["LockOutTime"])

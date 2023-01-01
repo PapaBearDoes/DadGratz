@@ -8,7 +8,7 @@ L["gratzDad"] = {
   "Hello %s's achievement. I'm Dad.",
   "I was wondering why %s's achievements kept getting bigger and bigger ... then it hit me.",
   "Two of %s's achievements walked into a bar. The third ducked.",
-  "%s was addicted to soap ... he's clean now though.",
+  "%s was addicted to soap ... they're clean now though.",
 }
 
 L["gratzNice"] = {
