@@ -1,7 +1,21 @@
+--[[
+                                      \\\\///
+                                     /       \
+                                   (| (.)(.) |)
+     .---------------------------.OOOo--()--oOOO.---------------------------.
+     |                                                                      |
+     |  PapaBearDoes's DadGratz Addon for World of Warcraft                 |
+     |  @project-version@
+     ######################################################################## ]]
+--   ## Let's init this file shall we?
+-- Imports
 local DG = select(2, ...)
 local DG = LibStub("AceAddon-3.0"):NewAddon(DG, "DadGratz", "AceConsole-3.0", "AceEvent-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
 local DadGratzOpts = DG:NewModule("DadGratzOpts", "AceConsole-3.0")
+-- End Imports
+--[[ ######################################################################## ]]
+--   ## Do All The Things!!!
 
 function DadGratzOpts:OnInitialize()
   self.db = LibStub("AceDB-3.0"):New("DadGratzDB")
@@ -37,3 +51,14 @@ local options = {
 }
 
 LibStub("AceConfig-3.0"):RegisterOptionsTable("DadGratz", options, {"dg"})
+
+--[[
+     ########################################################################
+     |  Last Editted By: @file-author@ - @file-date-iso@
+     |  @file-hash@
+     |                                                                      |
+     '-------------------------.oooO----------------------------------------|
+                              (    )     Oooo.
+                              \  (     (    )
+                               \__)     )  /
+                                       (__/                                   ]]

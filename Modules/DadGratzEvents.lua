@@ -1,9 +1,23 @@
+--[[
+                                      \\\\///
+                                     /       \
+                                   (| (.)(.) |)
+     .---------------------------.OOOo--()--oOOO.---------------------------.
+     |                                                                      |
+     |  PapaBearDoes's DadGratz Addon for World of Warcraft                 |
+     |  @project-version@
+     ######################################################################## ]]
+--   ## Let's init this file shall we?
+-- Imports
 local DG = select(2, ...)
 local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
 
 local Events = DG:NewModule("Events", "AceEvent-3.0")
 local Timer = DG:GetModule("Timer")
 local Util = DG:GetModule("Utils")
+-- End Imports
+--[[ ######################################################################## ]]
+--   ## Do All The Things!!!
 
 function DG:TriggeredEvent(message, recipient, channel, cheevo)
   DG.db.global["CheevoCount"] = DG.db.global["CheevoCount"] + 1
@@ -58,3 +72,14 @@ function Timer:pickGratz(guildy)
   local gratzRand = math.random(1, gratzSize)
   Util:SendMessage(string.format(L[gratzTable][gratzRand], guildy), guildy, "GUILD")
 end
+
+--[[
+     ########################################################################
+     |  Last Editted By: @file-author@ - @file-date-iso@
+     |  @file-hash@
+     |                                                                      |
+     '-------------------------.oooO----------------------------------------|
+                              (    )     Oooo.
+                              \  (     (    )
+                               \__)     )  /
+                                       (__/                                   ]]

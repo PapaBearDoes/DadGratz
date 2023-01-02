@@ -1,6 +1,21 @@
+--[[
+                                      \\\\///
+                                     /       \
+                                   (| (.)(.) |)
+     .---------------------------.OOOo--()--oOOO.---------------------------.
+     |                                                                      |
+     |  PapaBearDoes's DadGratz Addon for World of Warcraft                 |
+     |  @project-version@
+     ######################################################################## ]]
+--   ## Let's init this file shall we?
+-- Imports
 local DG = select(2, ...)
 local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
+-- End Imports
+--[[ ######################################################################## ]]
+--   ## Do All The Things!!!
 
+--@do-not-package@
 --[[-- Messing around!
 local optsGUI = DG:LibStub("AceGUI-3.0")
 
@@ -39,3 +54,14 @@ optsTabs:SetTitle("")
 optsTabs:SetTabs(optsTabGroups)
 optsTabs:SelectTab(safe)
 ]]
+--@end-do-not-package@
+--[[
+     ########################################################################
+     |  Last Editted By: @file-author@ - @file-date-iso@
+     |  @file-hash@
+     |                                                                      |
+     '-------------------------.oooO----------------------------------------|
+                              (    )     Oooo.
+                              \  (     (    )
+                               \__)     )  /
+                                       (__/                                   ]]

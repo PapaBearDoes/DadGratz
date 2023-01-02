@@ -15,7 +15,7 @@
 ## Notes-ptBR: #
 ## Notes-zhCN: #
 ## Notes-zhTW: #
-## Version: 1.0.0-alpha
+## Version: @project-version@
 
 # X-Meta
 ## X-Category: Guild, Achievements, Boss Encounters, Chat & Communications, Miscellaneous

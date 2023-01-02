@@ -24,6 +24,7 @@ ignore:
   - ToDo
   - .git
   - .gitattributes
+  - CHANGES.txt
 
 tools-used:
     - libdatabroker-1-1
