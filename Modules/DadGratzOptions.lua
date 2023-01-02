@@ -20,16 +20,6 @@ function DadGratzOpts:SetEnableAddon(info)
   end
 end
 
-function DadGratzOpts:SetChannel(info, input)
-  input = strupper(input)
-  if (input == 'GUILD' or input == 'OFFICER' or input == 'WHISPER' or input == 'PARTY') then
-    self.db.global.Channel = input
-    print("Set reply for messages to ", input)
-  else
-    print("Incorrect channel name. Message reply channel was not changed.")
-  end
-end
-
 local options = {
   name = "DadGratzOptions",
   handler = DadGratzOpts,
@@ -38,25 +28,10 @@ local options = {
     --AddonEnabled
     enable = {
       type = 'toggle',
-      name = 'Enable Addon',
+      name = 'Enable/Disable Addon',
       desc = '/dg enable',
       set = 'SetEnableAddon',
       get = 'GetAddonEnabled',
-    },
-    --AddonDisabled
-    disable = {
-      type = 'toggle',
-      name = 'Disable Addon',
-      desc = '/dg disable',
-      set = 'SetDisableAddon',
-      get = 'GetAddonEnabled',
-    },
-    --Channel
-    channel = {
-      type = 'input',
-      name = 'Channel to reply for guild messages',
-      desc = '/dg channel *CHANNEL*',
-      set = 'SetChannel',
     },
   },
 }

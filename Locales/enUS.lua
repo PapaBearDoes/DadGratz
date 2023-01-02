@@ -5,7 +5,10 @@ local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "enUS", true)
 -- enUS Localization
 -- L["identifier"] = "translation"
 L["gratzDad"] = {
-  "Hello %s's achievement.  I'm Dad."
+  "Hello %s's achievement. I'm Dad.",
+  "I was wondering why %s's achievements kept getting bigger and bigger ... then it hit me.",
+  "Two of %s's achievements walked into a bar. The third ducked.",
+  "%s was addicted to soap ... they're clean now though.",
 }
 
 L["gratzNice"] = {
@@ -137,5 +140,12 @@ L["gratzNice"] = {
 }
 
 L["gratzNaughty"] = {
-  "That's very good of you, %s. You're such a good player. Come sit by me and tell me all about it like the good player you are."
+  "That's very good of you, %s. You're such a good player. Come sit by me and tell me all about it like the good player you are.",
+  "Is that an achievement you got there %s, or are you just happy to see me?",
+  "Ooo, such a *big* achievement, %s. You're such a good player.",
+}
+
+L["gratzDark"] = {
+  "Much like the rest of Gen Z who are alive, %s survived that achievement without getting shot ...",
+  "Austria's biggest achievement was convincing the world that Hitler was German ... what's yours %s?",
 }
