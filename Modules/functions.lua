@@ -19,7 +19,7 @@ local L = DadGratz:GetLocale()
 --   ## Do All The Things!!!
 function DadGratz:LastRunCheck()
 	local Current = time()
-	local Past = DadGratz.globals.lockOutTime
+	local Past = (DadGratz.db.global.lastRun + DadGratz.db.global.lockOutTime)
 	if Current > Past then
 		return "Yes"
 	else

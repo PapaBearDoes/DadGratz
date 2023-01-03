@@ -41,15 +41,13 @@ function DG:OnInitialize()
     if module.OnEnable then
       hooksecurefunc(module, "OnEnable", DadGratz.OnModuleEnable_Common)
     end
+    if module.OnDisable then
+      hooksecurefunc(module, "OnDisable", DadGratz.OnModuleDisable_Common)
+    end
   end
-  
-  DadGratz:CreateDialogs()
   
   DadGratz:RegisterEvent("CHAT_MSG_GUILD")
   DadGratz:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT")
-  
-  DadGratz:UpdateIcon()
-  DadGratz:ScheduleUpdate()
   
   DadGratz:MiniMapIcon()
 end
@@ -57,10 +55,13 @@ end
 function DadGratz:OnModuleEnable_Common()
 end
 
+function DadGratz:OnModuleDisable_Common()
+end
+
 function DadGratz:MiniMapIcon()
   DadGratzIcon = LibStub("LibDBIcon-1.0")
   if not DadGratzIcon:IsRegistered(me .. "_mapIcon") then
-    DadGratzIcon:Register(me .. "_mapIcon", DLDB, DadGratz.db.profile.mmIcon)
+    DadGratzIcon:Register(me .. "_mapIcon", DGLDB, DadGratz.db.profile.mmIcon)
   end
 end
 
@@ -69,8 +70,6 @@ function DadGratz:OnEnable()
   DadGratzOptionFrames = {}
   DadGratzOptionFrames.general = DadGratzDialog:AddToBlizOptions("DadGratz", nil, nil, "general")
   DadGratzOptionFrames.profile = DadGratzDialog:AddToBlizOptions("DadGratz", L["Profiles"], "DadGratz", "profile")
-
-  DadGratz:ScheduleRepeatingTimer("MainUpdate", 1)
 end
 
 function DadGratz:OnDisable()
@@ -123,6 +122,7 @@ function DadGratz:CHAT_MSG_GUILD(_,MSG,Auth)
     print("Test Mode Active, triggering ...")
     DadGratz:TriggeredEvent("Guild Message: " .. MSG,Auth,"Guild",true)
   end
+  DadGratz.db.global.lastRun = time()
 end
 
 function DadGratz:CHAT_MSG_GUILD_ACHIEVEMENT(_,MSG,Auth)
@@ -130,6 +130,7 @@ function DadGratz:CHAT_MSG_GUILD_ACHIEVEMENT(_,MSG,Auth)
   print("======================")
   print("Guild Cheevo Received")
   DadGratz:TriggeredEvent("Guild Cheevo: " .. MSG,Auth,"Guild",true)
+  DadGratz.db.global.lastRun = time()
 end
 --[[
      ########################################################################
