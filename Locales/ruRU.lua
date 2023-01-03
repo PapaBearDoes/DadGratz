@@ -10,13 +10,11 @@
 --   ## Let's init this file shall we?
 -- Imports
 local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "ruRU")
-
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-
 -- ruRU Localization
-
+--@localization(locale="ruRU", format="lua_additive_table", handle-unlocalized = "comment", same-key-is-true=true, handle-subnamespaces="subtable")@
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@

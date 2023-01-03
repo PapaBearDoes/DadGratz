@@ -17,7 +17,6 @@ local Timer = DG:NewModule("Timer", "AceTimer-3.0")
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-
 function Util:LastRunCheck()
 	local Current = time()
 	local Past = (DG.LastRunDelayTime + DG.db.global["LockOutTime"])
@@ -26,6 +25,22 @@ function Util:LastRunCheck()
 	else
 		return "No"
 	end
+end
+
+function Util:TableLength(t)
+   local count = 0
+   for _ in pairs(t) do count = count + 1 end
+   return count
+end
+
+function Util:FindGratz(t, n)
+  local count = 0
+  for k, v in pairs(t) do
+    count = count + 1
+    if count == n then
+      return k
+    end
+  end
 end
 
 function Util:StartsWith(String,Start)
