@@ -1,0 +1,10 @@
+lightweight tag 03377a7ee9099072dbdaa3128d2476091f239fae Release-100002-72
+Author:	Alar of Runetotem <alar@aspide.it>
+Date:	Mon Nov 28 00:47:18 2022 +0100
+
+commit 03377a7ee9099072dbdaa3128d2476091f239fae
+Author: Alar of Runetotem <alar@aspide.it>
+Date:   Mon Nov 28 00:47:18 2022 +0100
+
+    Version bump
+
