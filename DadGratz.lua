@@ -1,12 +1,28 @@
+--[[
+                                      \\\\///
+                                     /       \
+                                   (| (.)(.) |)
+     .---------------------------.OOOo--()--oOOO.---------------------------.
+     |                                                                      |
+     |  PapaBearDoes's DadGratz Addon for World of Warcraft                 |
+     |  @project-version@
+     ######################################################################## ]]
+--   ## Let's init this file shall we?
+-- Imports
 local DG = select(2, ...)
 local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
 
 DG.version = GetAddOnMetadata("DadGratz", "Version")
-
+-- End Imports
+--   ######################################################################## ]]
+--   ## Do All The Things!!!
 -- Default the saved variables
 local DBdefaults = {
 	global = {
 		["AddonEnabled"] = true,
+    ["TestMode"] = false,
+    ["GratzNaughty"] = true,
+    ["GratzDark"] = true,
     ["LockOutTime"] = 5,
     ["CheevoCount"] = 0,
     --minimapIcon
@@ -39,14 +55,25 @@ function DG:OnInitialize()
   		tooltip:AddDoubleLine("");
   		tooltip:AddDoubleLine("");
   	end,
-  	OnClick = function(self, button) -- Left Click = Enable/Disable Addon, Right Click = open options GUI.
-  	end
+  	OnClick = function(self, click) -- Left Click = Enable/Disable Addon, Right Click = open options GUI.
+      if click == "LeftButton" then
+        if DG.db.global["AddonEnabled"] == false then
+          print("DadGratz is now enabled")
+          DG.db.global.AddonEnabled = true
+        else print("DadGratz is now disabled")
+          DG.db.global.AddonEnabled = false
+        end
+      elseif click == "RightButton" then
+      end
+    end
   })
+
   --Make the MiniMap Button
   local DadGratzIcon = LibStub("LibDBIcon-1.0")
   DadGratzIcon:Register("DadGratz", DadGratzLDB, DG.db.global.minimap)
   ]]
 end
+
 
 function DG:OnEnable()
 end
@@ -56,14 +83,23 @@ function DG:RegisterModule()
 end
 
 function DG:CHAT_MSG_GUILD(_,MSG,Auth)
-  DG:TriggeredEvent("Guild Message: " .. MSG,Auth,"Guild",false)
+  if DG.db.global["TestMode"] == true then
+    print("")
+    print("======================")
+    print("Guild Message Received")
+    print("Test Mode Active, triggering ...")
+    DG:TriggeredEvent("Guild Message: " .. MSG,Auth,"Guild",true)
+  end
 end
 
 function DG:CHAT_MSG_GUILD_ACHIEVEMENT(_,MSG,Auth)
+  print("")
+  print("======================")
+  print("Guild Cheevo Received")
   DG:TriggeredEvent("Guild Cheevo: " .. MSG,Auth,"Guild",true)
 end
 
-
+--@do-not-package@
 --[[
 --GUI testing
 -- Messing around!
@@ -125,3 +161,14 @@ tab:SelectTab("tab1")
 -- add to the frame container
 optsFrame:AddChild(tab)
 ]]
+--@end-do-not-package@
+--[[
+     ########################################################################
+     |  Last Editted By: @file-author@ - @file-date-iso@
+     |  @file-hash@
+     |                                                                      |
+     '-------------------------.oooO----------------------------------------|
+                              (    )     Oooo.
+                              \  (     (    )
+                               \__)     )  /
+                                       (__/                                   ]]
