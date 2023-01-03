@@ -9,52 +9,47 @@
      ######################################################################## ]]
 --   ## Let's init this file shall we?
 -- Imports
-local DG = select(2, ...)
-local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
+local _G = _G
+--Durrr = select(2, ...)
+local me, ns = ...
+local DadGratz = ns
+local L = DadGratz:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
+function DadGratz:LastRunCheck()
+	local Current = time()
+	local Past = DadGratz.globals.lockOutTime
+	if Current > Past then
+		return "Yes"
+	else
+		return "No"
+	end
+end
 
---@do-not-package@
---[[-- Messing around!
-local optsGUI = DG:LibStub("AceGUI-3.0")
+function DadGratz:TableLength(t)
+   local count = 0
+   for _ in pairs(t) do count = count + 1 end
+   return count
+end
 
---Create the main frame
-local optsFrame = optsGUI:Create("Frame")
-optsFrame:SetTitle("DadGratz Options")
-optsFrame:SetStatusText("A Collection of 'Dad Joke' based congratulations for your guild mates!")
---optsFrame:IsVisible(1)
---optsFrame:IsShown(1)
+function DadGratz:FindGratz(t, n)
+  local count = 0
+  for k, v in pairs(t) do
+    count = count + 1
+    if count == n then
+      return k
+    end
+  end
+end
 
---Throw the Widgets up!
--- Heading!!!
-local heading1 = optsGUI:Create("Heading")
-heading1:SetRelativeWidth(1)
-heading1:SetText("This is a heading!")
+function DadGratz:StartsWith(String,Start)
+   return string.sub(String,1,string.len(Start))==Start
+end
 
--- Tab Groups!
-local topTabGroups = {
-  achievement = "Achievements",
-  level = "Leveling",
-  joke = "Jokes"
-}
-local topTabs = optsGUI:Create("TabGroup")
-topTabs:SetTitle("")
-topTabs:SetTabs(tabGroups)
-topTabs:SelectTab(achievement)
-
-local optsTabGroups = {
-  safe = "Safe",
-  question = "Questionable",
-  nsfw = "NSFW",
-  dark = "Dark Humor"
-}
-local optsTabs = optsGUI:Create("TabGroup")
-optsTabs:SetTitle("")
-optsTabs:SetTabs(optsTabGroups)
-optsTabs:SelectTab(safe)
-]]
---@end-do-not-package@
+function DadGratz:SendMessage(message, recipient, channel)
+  SendChatMessage(message, channel, "Common", recipient)
+end
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@

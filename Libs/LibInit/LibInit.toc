@@ -1,0 +1,18 @@
+## Interface: 100002
+## Title: LibInit
+## Notes: Makes using ACE 3 libraries even easier
+## Author: Alar of Daggerspine
+## Version: Release-100002-72 100002
+## X-Revision: 03377a7
+## eMail: alar@aspide.it
+## URL: http://wow.aspide.it
+## OptionalDeps: Ace3
+## DefaultState: Enabled
+## X-ID: LIBINIT
+## X-Category: Libraries
+## X-License: GPL v3
+## X-eMail: alar@aspide.it
+## X-Date: 2022-11-27T23:47:18Z
+## X-Embeds:
+embeds.xml
+LibInit.lua

@@ -9,159 +9,128 @@
      ######################################################################## ]]
 --   ## Let's init this file shall we?
 -- Imports
-local DG = select(2, ...)
-local L = LibStub("AceLocale-3.0"):GetLocale("DadGratz")
-
-DG.version = GetAddOnMetadata("DadGratz", "Version")
+local _G = _G
+local me, ns = ...
+local DadGratzInitOptions = {
+  profile = "Default",
+  noswitch = false,
+  nogui = false,
+  nohelp = false,
+  enhancedProfile = true
+}
+local DadGratz = LibStub("LibInit"):NewAddon(ns, me, DadGratzInitOptions, true, "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0", "AceHook-3.0")
+local L = DadGratz:GetLocale()
 -- End Imports
 --   ######################################################################## ]]
 --   ## Do All The Things!!!
--- Default the saved variables
-local DBdefaults = {
-	global = {
-		["AddonEnabled"] = true,
-    ["TestMode"] = false,
-    ["GratzNaughty"] = true,
-    ["GratzDark"] = true,
-    ["LockOutTime"] = 5,
-    ["CheevoCount"] = 0,
-    --minimapIcon
-    minimap = {
-      hide = false,
-      minimapPos = 215,
-    },
-	},
-}
-
 function DG:OnInitialize()
-  DG.db = LibStub:GetLibrary("AceDB-3.0"):New("DadGratz", DBdefaults, true)
-  DG:RegisterEvent("CHAT_MSG_GUILD")
-  DG:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT")
-  DG.LastRunDelayTime = 0
-
-	for moduleName, module in pairs(DG.modules) do
-		DG[moduleName] = module
-	end
-	DG:RegisterModule()
-
-  --[[
-  --Make the LibDataBroker
-  local DadGratzLDB = LibStub("LibDataBroker-1.1"):NewDataObject("DadGratzLDB", {
-    type = "data source",
-    text = "DadGratz",
-  	icon = "Interface\\Icons\\INV_Guild_Standard_Horde_C",
-  	OnTooltipShow = function(tooltip)
-  		tooltip:AddDoubleLine("");
-  		tooltip:AddDoubleLine("");
-  		tooltip:AddDoubleLine("");
-  	end,
-  	OnClick = function(self, click) -- Left Click = Enable/Disable Addon, Right Click = open options GUI.
-      if click == "LeftButton" then
-        if DG.db.global["AddonEnabled"] == false then
-          print("DadGratz is now enabled")
-          DG.db.global.AddonEnabled = true
-        else print("DadGratz is now disabled")
-          DG.db.global.AddonEnabled = false
-        end
-      elseif click == "RightButton" then
-      end
+  DadGratz.db = LibStub("AceDB-3.0"):New("DadGratzSV", DadGratz.dbDefaults, "Default")
+  if not DadGratz.db then
+    print(L["errorDB"])
+  end
+  DadGratz.db.RegisterCallback(self, "OnProfileChanged", "UpdateProfile")
+  DadGratz.db.RegisterCallback(self, "OnProfileCopied", "UpdateProfile")
+  DadGratz.db.RegisterCallback(self, "OnProfileReset", "UpdateProfile")
+  
+  DadGratz.options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(DadGratz.db)
+  LibStub("AceConfig-3.0"):RegisterOptionsTable(me, DadGratz.options, nil)
+  
+  -- Enable/disable modules based on saved settings
+  for name, module in DadGratz:IterateModules() do
+    module:SetEnabledState(DadGratz.db.profile.moduleEnabledState[name] or false)
+    if module.OnEnable then
+      hooksecurefunc(module, "OnEnable", DadGratz.OnModuleEnable_Common)
     end
-  })
-
-  --Make the MiniMap Button
-  local DadGratzIcon = LibStub("LibDBIcon-1.0")
-  DadGratzIcon:Register("DadGratz", DadGratzLDB, DG.db.global.minimap)
-  ]]
+  end
+  
+  DadGratz:CreateDialogs()
+  
+  DadGratz:RegisterEvent("CHAT_MSG_GUILD")
+  DadGratz:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT")
+  
+  DadGratz:UpdateIcon()
+  DadGratz:ScheduleUpdate()
+  
+  DadGratz:MiniMapIcon()
 end
 
-
-function DG:OnEnable()
+function DadGratz:OnModuleEnable_Common()
 end
 
-function DG:RegisterModule()
-  DG.moduleOptions = {callback="Options:Load"}
+function DadGratz:MiniMapIcon()
+  DadGratzIcon = LibStub("LibDBIcon-1.0")
+  if not DadGratzIcon:IsRegistered(me .. "_mapIcon") then
+    DadGratzIcon:Register(me .. "_mapIcon", DLDB, DadGratz.db.profile.mmIcon)
+  end
 end
 
-function DG:CHAT_MSG_GUILD(_,MSG,Auth)
-  if DG.db.global["TestMode"] == true then
+function DadGratz:OnEnable()
+  local DadGratzDialog = LibStub("AceConfigDialog-3.0")
+  DadGratzOptionFrames = {}
+  DadGratzOptionFrames.general = DadGratzDialog:AddToBlizOptions("DadGratz", nil, nil, "general")
+  DadGratzOptionFrames.profile = DadGratzDialog:AddToBlizOptions("DadGratz", L["Profiles"], "DadGratz", "profile")
+
+  DadGratz:ScheduleRepeatingTimer("MainUpdate", 1)
+end
+
+function DadGratz:OnDisable()
+end
+
+-- Config window --
+function DadGratz:ShowConfig()
+	InterfaceOptionsFrame_OpenToCategory(DadGratzOptionFrames.profile)
+	InterfaceOptionsFrame_OpenToCategory(DadGratzOptionFrames.general)
+end
+-- End Options --
+
+function DadGratz:UpdateOptions()
+  LibStub("AceConfigRegistry-3.0"):NotifyChange(me)
+end
+
+function DadGratz:UpdateProfile()
+  DadGratz:ScheduleTimer("UpdateProfileDelayed", 0)
+end
+
+function DadGratz:OnProfileChanged(event, database, newProfileKey)
+  DadGratz.db.profile = database.profile
+end
+
+function DadGratz:UpdateProfileDelayed()
+  for timerKey, timerValue in DadGratz:IterateModules() do
+    if timerValue.db.profile.on then
+      if timerValue:IsEnabled() then
+        timerValue:Disable()
+        timerValue:Enable()
+      else
+        timerValue:Enable()
+      end
+    else
+      timerValue:Disable()
+    end
+  end
+
+  DadGratz:UpdateOptions()
+end
+
+function DadGratz:OnProfileReset()
+end
+
+function DadGratz:CHAT_MSG_GUILD(_,MSG,Auth)
+  if DadGratz.dbDefaults.profile.TestMode == true then
     print("")
     print("======================")
     print("Guild Message Received")
     print("Test Mode Active, triggering ...")
-    DG:TriggeredEvent("Guild Message: " .. MSG,Auth,"Guild",true)
+    DadGratz:TriggeredEvent("Guild Message: " .. MSG,Auth,"Guild",true)
   end
 end
 
-function DG:CHAT_MSG_GUILD_ACHIEVEMENT(_,MSG,Auth)
+function DadGratz:CHAT_MSG_GUILD_ACHIEVEMENT(_,MSG,Auth)
   print("")
   print("======================")
   print("Guild Cheevo Received")
-  DG:TriggeredEvent("Guild Cheevo: " .. MSG,Auth,"Guild",true)
+  DadGratz:TriggeredEvent("Guild Cheevo: " .. MSG,Auth,"Guild",true)
 end
-
---@do-not-package@
---[[
---GUI testing
--- Messing around!
-local optsGUI = LibStub("AceGUI-3.0")
-
--- function that draws the widgets for the first tab
-local function DrawGroup1(container)
-  local desc = optsGUI:Create("Label")
-  desc:SetText("This is Tab 1")
-  desc:SetFullWidth(true)
-  container:AddChild(desc)
-
-  local button = optsGUI:Create("Button")
-  button:SetText("Tab 1 Button")
-  button:SetWidth(200)
-  container:AddChild(button)
-end
-
--- function that draws the widgets for the second tab
-local function DrawGroup2(container)
-  local desc = optsGUI:Create("Label")
-  desc:SetText("This is Tab 2")
-  desc:SetFullWidth(true)
-  container:AddChild(desc)
-
-  local button = optsGUI:Create("Button")
-  button:SetText("Tab 2 Button")
-  button:SetWidth(200)
-  container:AddChild(button)
-end
-
--- Callback function for OnGroupSelected
-local function SelectGroup(container, event, group)
-   container:ReleaseChildren()
-   if group == "tab1" then
-      DrawGroup1(container)
-   elseif group == "tab2" then
-      DrawGroup2(container)
-   end
-end
-
--- Create the frame container
-local optsFrame = optsGUI:Create("Frame")
-optsFrame:SetTitle("Example Frame")
-optsFrame:SetStatusText("AceGUI-3.0 Example Container Frame")
-optsFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
--- Fill Layout - the TabGroup widget will fill the whole frame
-optsFrame:SetLayout("Fill")
-
--- Create the TabGroup
-local tab = optsGUI:Create("TabGroup")
-tab:SetLayout("Flow")
--- Setup which tabs to show
-tab:SetTabs({{text="Tab 1", value="tab1"}, {text="Tab 2", value="tab2"}})
--- Register callback
-tab:SetCallback("OnGroupSelected", SelectGroup)
--- Set initial Tab (this will fire the OnGroupSelected callback)
-tab:SelectTab("tab1")
--- add to the frame container
-optsFrame:AddChild(tab)
-]]
---@end-do-not-package@
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@
