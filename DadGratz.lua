@@ -35,7 +35,7 @@ DadGratz.dbDefaults = {
     cheevoCount = 0,
   },
   profile = {
-    testMode = true,
+    testMode = false,
     doNaughty = true,
     doDark = true,
     mmIcon = {
@@ -156,13 +156,6 @@ DGLDB = DadGratz_LDB:NewDataObject("DadGratzLDB", {
 --[[FUNCTIONS]]
 function DadGratz:OnInitialize()
   DadGratz.db = LibStub("AceDB-3.0"):New("DadGratzSV", DadGratz.dbDefaults, "Default")
-  if not DadGratz.db then
-    print(L["errorDB"])
-  end
-  DadGratz.db.RegisterCallback(self, "OnProfileChanged", "UpdateProfile")
-  DadGratz.db.RegisterCallback(self, "OnProfileCopied", "UpdateProfile")
-  DadGratz.db.RegisterCallback(self, "OnProfileReset", "UpdateProfile")
-  
   DadGratz.options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(DadGratz.db)
   LibStub("AceConfig-3.0"):RegisterOptionsTable(me, DadGratz.options, nil)
   
@@ -187,7 +180,6 @@ function DadGratz:OnEnable()
   local DadGratzDialog = LibStub("AceConfigDialog-3.0")
   DadGratzOptionFrames = {}
   DadGratzOptionFrames.general = DadGratzDialog:AddToBlizOptions(L["AddonName"], nil, nil, L["general"])
-  DadGratzOptionFrames.profile = DadGratzDialog:AddToBlizOptions(L["AddonName"], L["Profiles"], L["AddonName"], L["profile"])
 end
 
 -- Config window --
@@ -199,34 +191,6 @@ end
 
 function DadGratz:UpdateOptions()
   LibStub("AceConfigRegistry-3.0"):NotifyChange(me)
-end
-
-function DadGratz:UpdateProfile()
-  DadGratz:ScheduleTimer("UpdateProfileDelayed", 0)
-end
-
-function DadGratz:OnProfileChanged(event, database, newProfileKey)
-  DadGratz.db.profile = database.profile
-end
-
-function DadGratz:UpdateProfileDelayed()
-  for timerKey, timerValue in DadGratz:IterateModules() do
-    if timerValue.db.profile.on then
-      if timerValue:IsEnabled() then
-        timerValue:Disable()
-        timerValue:Enable()
-      else
-        timerValue:Enable()
-      end
-    else
-      timerValue:Disable()
-    end
-  end
-
-  DadGratz:UpdateOptions()
-end
-
-function DadGratz:OnProfileReset()
 end
 
 function DadGratz:CHAT_MSG_GUILD(_,MSG,Auth)
