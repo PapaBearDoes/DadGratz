@@ -156,6 +156,19 @@ L["UseDefault2"] = "Utiliza los perfiles de la \"%s\" para todos sus caracteres"
 end
 L=l:NewLocale(me,'zhTW')
 if L then
+L["Configuration"] = "Configurazione"
+L["Description"] = "Descrizione"
+L["Libraries"] = "Librerie"
+L["Profile"] = "Profilo"
+L["Purge_Desc"] = "Puoi cancellare tutti i profili inutilizzati con un singolo click"
+L["Purge1"] = "Cancella i profili inutilizzati"
+L["Purge2"] = "Cancella tutti i profili che non sono usati da un personaggio"
+L["Release Notes"] = "Note di rilascio"
+L["Toggles"] = "Interruttori"
+L["UseDefault_Desc"] = "Puoi far usare a tutti i tuoi personaggi il profilo \"%s\""
+L["UseDefault1"] = "Imposta il profilo \"%s\" su tutti i personaggi"
+L["UseDefault2"] = "Usa il profilo '%s\" per tutti i personaggi"
+
 L["Configuration"] = "\231\181\132\230\133\139\239\188\140"
 L["Description"] = "\230\143\143\232\191\176\239\188\140"
 L["Libraries"] = "\229\156\150\230\155\184\233\164\168\239\188\140"

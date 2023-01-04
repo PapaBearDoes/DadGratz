@@ -33,8 +33,5 @@ Libs\LibDialog-1.0\LibDialog-1.0.lua
 # Load Languages
 Locales\locales.xml
 
-# Load Modules
-Modules\modules.xml
-
 # Load Main file(s)
 DadGratz.lua
