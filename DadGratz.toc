@@ -4,17 +4,16 @@
 ## Title: DadGratz
 ## Author: PapaBearDoes
 ## Notes: PapaBear's collection of Dad Joke congratulations.
-## Notes-deDE: #
-## Notes-enUS: PapaBear's collection of Dad Joke congratulations.
-## Notes-esES: #
-## Notes-esMX: #
-## Notes-frFR: #
-## Notes-itIT: #
-## Notes-koKR: #
-## Notes-ptBR: #
-## Notes-ptBR: #
-## Notes-zhCN: #
-## Notes-zhTW: #
+## Notes-deDE: PapaBear's sammlung von papa-witz-glückwünschen.
+## Notes-enUS: PapaBear's collection of dad joke congratulations.
+## Notes-esES: PapaBear's colección de felicitaciones de broma de papá.
+## Notes-esMX: PapaBear's colección de felicitaciones de broma de papá.
+## Notes-frFR: PapaBear's collection de félicitations à la blague de papa.
+## Notes-itIT: PapaBear's raccolta di congratulazioni scherzo papà.
+## Notes-koKR: PapaBear의 아빠 농담 축하 모음집.
+## Notes-ptBR: A coleção de parabéns de piadas de papai do PapaBear.
+## Notes-zhCN: PapaBear 收集的祝贺爸爸的笑话.
+## Notes-zhTW: PapaBear 收集的祝贺爸爸的笑话.
 ## Version: @project-version@
 
 # X-Meta
@@ -27,28 +26,12 @@
 ## SavedVariables: DadGratzSV
 
 # Load Libs
-# MUST Load LibStub 1st, CallbackHandler 2nd, Locales 3rd.
-Libs\LibStub\LibStub.lua
-Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
-Libs\AceLocale-3.0\AceLocale-3.0.xml
-# Load the Base Libs
-Libs\AceAddon-3.0\AceAddon-3.0.xml
-Libs\AceConsole-3.0\AceConsole-3.0.xml
-Libs\AceDB-3.0\AceDB-3.0.xml
-Libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
-Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+Libs\LibInit\Libinit.xml
 Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
-# Load Addon Specific Libs
-Libs\AceConfig-3.0\AceConfig-3.0.xml
-Libs\AceEvent-3.0\AceEvent-3.0.xml
-Libs\AceGUI-3.0\AceGUI-3.0.xml
-Libs\AceTimer-3.0\AceTimer-3.0.xml
+Libs\LibDialog-1.0\LibDialog-1.0.lua
 
 # Load Languages
 Locales\locales.xml
-
-# Load Modules
-Modules\modules.xml
 
 # Load Main file(s)
 DadGratz.lua
