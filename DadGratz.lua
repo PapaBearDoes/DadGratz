@@ -35,7 +35,7 @@ DadGratz.dbDefaults = {
     cheevoCount = 0,
   },
   profile = {
-    testMode = false,
+    testMode = true,
     doNaughty = true,
     doDark = true,
     mmIcon = {
@@ -276,7 +276,6 @@ function DadGratz:Process(message, recipient, channel)
     DadGratz:ScheduleTimer("pickGratz", delay, guildy)
   end
   DadGratz.db.global.cheevoCount = 0
-  end
 end
 
 function DadGratz:pickGratz(guildy)
