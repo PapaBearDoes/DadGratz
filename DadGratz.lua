@@ -11,22 +11,19 @@
 -- Imports
 local _G = _G
 local me, ns = ...
-local DadGratzInitOptions = {
+local initOptions = {
   profile = "Default",
   noswitch = false,
   nogui = false,
   nohelp = false,
   enhancedProfile = true
 }
-local DadGratz = LibStub("LibInit"):NewAddon(ns, me, DadGratzInitOptions, true)
+local DadGratz = LibStub("LibInit"):NewAddon(ns, me, initOptions, true)
 local L = DadGratz:GetLocale()
+local DG = {}
 -- End Imports
 --   ######################################################################## ]]
 --   ## Do All The Things!!!
--- Create any required hidden frames
-DadGratz.frame = CreateFrame("GameTooltip")
-DadGratz.frame:SetOwner(WorldFrame, "ANCHOR_NONE")
-
 -- Create DB defaults
 DadGratz.dbDefaults = {
   global = {
@@ -35,13 +32,22 @@ DadGratz.dbDefaults = {
     cheevoCount = 0,
   },
   profile = {
-    testMode = true,
+    testMode = false,
+    weight = {
+      dad = 0,
+      nice = 0,
+      custom = 0,
+      naughty = 0,
+      dark = 0,
+    },
     doNaughty = true,
     doDark = true,
+    doCustom = true,
     mmIcon = {
       hide = false,
       minimapPos = 205,
     },
+    customGratz = {},
   },
 }
 
@@ -57,47 +63,62 @@ DadGratz.options = {
       cmdInline = true,
       args = {
         separator1 = {
+          order = 1,
           type = "header",
           name = L["GratzOptions"],
-          order = 1,
         },
         doNaughty = {
           order = 2,
           type = "toggle",
           name = L["DoNaughtyGratz"],
-          desc = L["DoNaughtyGratzToggle"],
+          desc = L["DoNaughtyGratzDesc"],
           get = function()
-            return DadGratz.db.profile.doNaughty
+            return DG.db.profile.doNaughty
           end,
           set = function(key, value)
-            DadGratz.db.profile.doNaughty = value
-            if not DadGratz.db.profile.doNaughty then
-              DadGratz.db.profile.doNaughty = value
+            DG.db.profile.doNaughty = value
+            if not DG.db.profile.doNaughty then
+              DG.db.profile.doNaughty = value
             end
           end,
         },
-        DoDark = {
+        doDark = {
           order = 3,
           type = "toggle",
           name = L["DoDarkGratz"],
-          desc = L["DoDarkGratzToggle"],
+          desc = L["DoDarkGratzDesc"],
           get = function()
-            return DadGratz.db.profile.doDark
+            return DG.db.profile.doDark
           end,
           set = function(key, value)
-            DadGratz.db.profile.doDark = value
-            if not DadGratz.db.profile.doDark then
-              DadGratz.db.profile.doDark = value
+            DG.db.profile.doDark = value
+            if not DG.db.profile.doDark then
+              DG.db.profile.doDark = value
+            end
+          end,
+        },
+        doCustom = {
+          order = 4,
+          type = "toggle",
+          name = L["DoCustomGratz"],
+          desc = L["DoCustomGratzDesc"],
+          get = function()
+            return DG.db.profile.doCustom
+          end,
+          set = function(key, value)
+            DG.db.profile.doCustom = value
+            if not DG.db.profile.doCustom then
+              DG.db.profile.doCustom = value
             end
           end,
         },
         showMinimapButton = {
-          order = 6,
+          order = 5,
           type = "toggle",
           name = L["ShowMinimapButton"],
           desc = L["ShowMinimapButtonDesc"],
           get = function()
-            if DadGratz.db.profile.mmIcon.hide == true then
+            if DG.db.profile.mmIcon.hide == true then
               show = false
             else
               show = true
@@ -106,12 +127,163 @@ DadGratz.options = {
           end,
           set = function(key, value)
             if value == true then
-              DadGratz.db.profile.mmIcon.hide = false
+              DG.db.profile.mmIcon.hide = false
               DadGratzIcon:Show(me .. "_mapIcon")
             else
-              DadGratz.db.profile.mmIcon.hide = true
+              DG.db.profile.mmIcon.hide = true
               DadGratzIcon:Hide(me .. "_mapIcon")
             end
+          end
+        },
+        separator2 = {
+          order = 6,
+          type = "header",
+          name = L["BuiltinWeights"],
+        },
+        dadWeight = {
+          order = 7,
+          type = "range",
+          name = L["DadWeight"],
+          desc = L["DadWeightDesc"],
+          min = -1,
+          max = 1,
+          step = 1,
+          width = "normal",
+          get = function()
+            return DG.db.profile.weight.dad
+          end,
+          set = function(key, value)
+            DG.db.profile.weight.dad = value
+          end,
+        },
+        niceWeight = {
+          order = 8,
+          type = "range",
+          name = L["NiceWeight"],
+          desc = L["NiceWeightDesc"],
+          min = -1,
+          max = 1,
+          step = 1,
+          width = "normal",
+          get = function()
+            return DG.db.profile.weight.nice
+          end,
+          set = function(key, value)
+            DG.db.profile.weight.nice = value
+          end,
+        },
+        separator3 = {
+          order = 9,
+          type = "header",
+          name = L["GratzWeights"],
+        },
+        customWeight = {
+          order = 10,
+          type = "range",
+          name = L["CustomWeight"],
+          desc = L["CustomWeightDesc"],
+          min = -1,
+          max = 1,
+          step = 1,
+          width = "normal",
+          get = function()
+            return DG.db.profile.weight.custom
+          end,
+          set = function(key, value)
+            DG.db.profile.weight.custom = value
+          end,
+          disabled = function()
+            return (DG.db.profile.doCustom == false)
+          end,
+        },
+        naughtyWeight = {
+          order = 11,
+          type = "range",
+          name = L["NaughtyWeight"],
+          desc = L["NaughtyWeightDesc"],
+          min = -1,
+          max = 1,
+          step = 1,
+          width = "normal",
+          get = function()
+            return DG.db.profile.weight.naughty
+          end,
+          set = function(key, value)
+            DG.db.profile.weight.naughty = value
+          end,
+          disabled = function()
+            return (DG.db.profile.doNaughty == false)
+          end,
+        },
+        darkWeight = {
+          order = 12,
+          type = "range",
+          name = L["DarkWeight"],
+          desc = L["DarkWeightDesc"],
+          min = -1,
+          max = 1,
+          step = 1,
+          width = "normal",
+          get = function()
+            return DG.db.profile.weight.dark
+          end,
+          set = function(key, value)
+            DG.db.profile.weight.dark = value
+          end,
+          disabled = function()
+            return (DG.db.profile.doDark == false)
+          end,
+        },
+      },
+    },
+    custom = {
+      order = 2,
+      type = "group",
+      name = L["CustomGratzSettings"],
+      cmdInline = true,
+      args = {
+        separator4 = {
+          order = 1,
+          type = "header",
+          name = L["AddCustomGratz"],
+        },
+        addCustomGratz = {
+          order = 2,
+          type = "input",
+          width = "full",
+          name = L["AddCustomGratz"],
+          desc = L["AddCustomGratzDesc"],
+          get = function()
+            return
+          end,
+          set = function(key, value)
+            print("Value: " .. value)
+            DG.db.profile.customGratz[value] = value
+            DadGratz:UpdateProfile()
+          end,
+        },
+        separator5 = {
+          order = 3,
+          type = "header",
+          name = L["ListCustomGratz"],
+        },
+        listCustomGratz = {
+          order = 4,
+          type = "select",
+          width = "full",
+          confirm = true,
+          name = L["DelCustomGratz"],
+          desc = L["DelCustomGratzDesc"],
+          style = "radio",
+          get = function()
+          end,
+          set = function(key, value)
+            print("Delete: " .. value .. " - CONFIRMED")
+            DG.db.profile.customGratz[value] = nil
+            DadGratz:UpdateProfile()
+          end,
+          values = function()
+            return DG.db.profile.customGratz
           end,
         },
       },
@@ -137,15 +309,20 @@ DGLDB = DadGratz_LDB:NewDataObject("DadGratzLDB", {
     end
     tooltip:AddLine(L["AddonName"] .. " " .. GetAddOnMetadata("DadGratz", "Version"))
     
-    if DadGratz.db.profile.doNaughty == true then
+    if DG.db.profile.doNaughty == true then
       tooltip:AddLine(L["NaughtyGratzEnabled"] .. ".")
     else
       tooltip:AddLine(L["NaughtyGratzDisabled"] .. ".")
     end
-    if DadGratz.db.profile.doDark == true then
+    if DG.db.profile.doDark == true then
       tooltip:AddLine(L["DarkGratzEnabled"] .. ".")
     else
       tooltip:AddLine(L["DarkGratzDisabled"] .. ".")
+    end
+    if DG.db.profile.doCustom == true then
+      tooltip:AddLine(L["CustomGratzEnabled"] .. ".")
+    else
+      tooltip:AddLine(L["CustomGratzDisabled"] .. ".")
     end
 
     tooltip:AddLine(" ")
@@ -155,42 +332,47 @@ DGLDB = DadGratz_LDB:NewDataObject("DadGratzLDB", {
 
 --[[FUNCTIONS]]
 function DadGratz:OnInitialize()
-  DadGratz.db = LibStub("AceDB-3.0"):New("DadGratzSV", DadGratz.dbDefaults, "Default")
-  DadGratz.db.RegisterCallback(self, "OnProfileChanged", "UpdateProfile")
-  DadGratz.db.RegisterCallback(self, "OnProfileCopied", "UpdateProfile")
-  DadGratz.db.RegisterCallback(self, "OnProfileReset", "UpdateProfile")
+  DG.db = LibStub("AceDB-3.0"):New("DadGratzSV", DadGratz.dbDefaults, "Default")
+  DG.db.RegisterCallback(self, "OnProfileChanged", "UpdateProfile")
+  DG.db.RegisterCallback(self, "OnProfileCopied", "UpdateProfile")
+  DG.db.RegisterCallback(self, "OnProfileReset", "UpdateProfile")
   
-  DadGratz.options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(DadGratz.db)
+  DadGratz.options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(DG.db)
   LibStub("AceConfig-3.0"):RegisterOptionsTable(me, DadGratz.options, nil)
   
-  DadGratz:RegisterEvent("CHAT_MSG_GUILD")
+  if DG.db.profile.testMode == true then
+    DadGratz:RegisterEvent("CHAT_MSG_GUILD")
+  end
+
   DadGratz:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT")
   
   DadGratz:MiniMapIcon()
   
-  if DadGratz.db.profile.testMode == true then
+  if DG.db.profile.testMode == true then
     print(L["AddonName"] .. ": " .. L["TestModeEnabled"])
   end
+  DG.db.global.cheevoCount = 0
 end
 
 function DadGratz:MiniMapIcon()
-  DadGratzIcon = LibStub("LibDBIcon-1.0")
-  if not DadGratzIcon:IsRegistered(me .. "_mapIcon") then
-    DadGratzIcon:Register(me .. "_mapIcon", DGLDB, DadGratz.db.profile.mmIcon)
+  DGIcon = LibStub("LibDBIcon-1.0")
+  if not DGIcon:IsRegistered(me .. "_mapIcon") then
+    DGIcon:Register(me .. "_mapIcon", DGLDB, DG.db.profile.mmIcon)
   end
 end
 
 function DadGratz:OnEnable()
-  local DadGratzDialog = LibStub("AceConfigDialog-3.0")
-  DadGratzOptionFrames = {}
-  DadGratzOptionFrames.general = DadGratzDialog:AddToBlizOptions(L["AddonName"], nil, nil, L["general"])
-  DadGratzOptionFrames.profile = DadGratzDialog:AddToBlizOptions(L["AddonName"], L["Profiles"], L["AddonName"], L["profile"])
+  local DGDialog = LibStub("AceConfigDialog-3.0")
+  DGOptionFrames = {}
+  DGOptionFrames.general = DGDialog:AddToBlizOptions(L["AddonName"], nil, nil, "general")
+  DGOptionFrames.custom = DGDialog:AddToBlizOptions(L["AddonName"], L["CustomGratz"], L["AddonName"], "custom")
+  DGOptionFrames.profile = DGDialog:AddToBlizOptions(L["AddonName"], L["Profiles"], L["AddonName"], "profile")
 end
 
 -- Config window --
 function DadGratz:ShowConfig()
-	InterfaceOptionsFrame_OpenToCategory(DadGratzOptionFrames.profile)
-	InterfaceOptionsFrame_OpenToCategory(DadGratzOptionFrames.general)
+	InterfaceOptionsFrame_OpenToCategory(DGOptionFrames.profile)
+	InterfaceOptionsFrame_OpenToCategory(DGOptionFrames.general)
 end
 -- End Options --
 
@@ -203,7 +385,7 @@ function DadGratz:UpdateProfile()
 end
 
 function DadGratz:OnProfileChanged(event, database, newProfileKey)
-  DadGratz.db.profile = database.profile
+  DG.db.profile = database.profile
 end
 
 function DadGratz:UpdateProfileDelayed()
@@ -219,7 +401,6 @@ function DadGratz:UpdateProfileDelayed()
       timerValue:Disable()
     end
   end
-
   DadGratz:UpdateOptions()
 end
 
@@ -227,119 +408,167 @@ function DadGratz:OnProfileReset()
 end
 
 function DadGratz:CHAT_MSG_GUILD(_,MSG,Auth)
-  if DadGratz.db.profile.testMode == true then
-    print("")
-    print("======================")
-    print(L["GuildMessageReceived"])
-    print(L["TestModeEnabled"] .. ", " .. L["triggering"] .. " ...")
-    DadGratz:TriggeredEvent(MSG,Auth,"Guild")
-  end
-  DadGratz.db.global.lastRun = time()
+  print("")
+  print("======================")
+  print(L["GuildMessageReceived"])
+  print(L["TestModeEnabled"] .. ", " .. L["triggering"] .. " ...")
+  DadGratz:TriggeredEvent(MSG,Auth,"GUILD")
+  DG.db.global.lastRun = time()
 end
 
 function DadGratz:CHAT_MSG_GUILD_ACHIEVEMENT(_,MSG,Auth)
-  if DadGratz.db.profile.testMode == true then
-    print("")
-    print("======================")
-    print(L["GuildAchievementReceived"])
-  end
-  DadGratz:TriggeredEvent(MSG,Auth,"Guild")
-  DadGratz.db.global.lastRun = time()
+  DadGratz:TriggeredEvent(MSG,Auth,"GUILD")
+  DG.db.global.lastRun = time()
 end
 
 function DadGratz:TriggeredEvent(message, recipient, channel)
-  DadGratz.db.global.cheevoCount = DadGratz.db.global.cheevoCount + 1
-  if DadGratz.db.global.cheevoCount < 2 then
+  DG.db.global.cheevoCount = DG.db.global.cheevoCount + 1
+
+  if DG.db.profile.testMode == true then
+    print("DadGratz:TriggeredEvent")
+    print("Cheevo Count: " .. DG.db.global.cheevoCount)
+  end
+
+  if DG.db.global.cheevoCount < 2 then
     DadGratz:ScheduleTimer("Process", 5, message, recipient, channel)
   end
 end
 
 function DadGratz:Process(message, recipient, channel)
+  if DG.db.profile.testMode == true then
+    print("DadGratz:Process")
+  end
   local s, e = string.find(recipient, "[^-]+")
   local guildy = string.sub(recipient, 1, e)
   
   if UnitName("player") == guildy then
     print(L["AddonName"] .. ": " .. L["MyAchievement"])
-    if DadGratz.db.profile.testMode == true then
+    if DG.db.profile.testMode == true then
       local delay = math.random(1, 10)
+      print("Delay: " .. delay)
       DadGratz:ScheduleTimer("pickGratz", delay, guildy)
     end
   else
-    if DadGratz.db.global.cheevoCount > 3 then
+    if DG.db.global.cheevoCount > 3 then
       guildy = L["everyone"]
     end
 
     local delay = math.random(1, 10)
+    if DG.db.profile.testMode == true then
+      print("Delay: " .. delay)
+    end
     DadGratz:ScheduleTimer("pickGratz", delay, guildy)
   end
-  DadGratz.db.global.cheevoCount = 0
+  DG.db.global.cheevoCount = 0
 end
 
 function DadGratz:pickGratz(guildy)
-  local pickone = 0
-  if DadGratz.db.profile.doNaughty == true and DadGratz.db.profile.doDark == true then
-    if DadGratz.db.profile.testMode == true then
-      print(L["NaughtyAndDark"])
-    end
-    pickOne = math.random(1, 40)
-  elseif DadGratz.db.profile.doNaughty == true and DadGratz.db.profile.doDark == false then
-    if DadGratz.db.profile.testMode == true then
-      print(L["NaughtyOnly"])
-    end
-    pickOne = math.random(1, 30)
-  elseif DadGratz.db.profile.doNaughty == false and DadGratz.db.profile.doDark == false then
-    if DadGratz.db.profile.testMode == true then
-      print(L["Neither"])
-    end
-    pickOne = math.random(1, 20)
-  elseif DadGratz.db.profile.doNaughty == false and DadGratz.db.profile.doDark == true then
-    if DadGratz.db.profile.testMode == true then
-      print(L["DarkOnly"])
-    end
-    pickOne = math.random(1, 40)
-    if pickOne >= 21 and pickOne <= 30 then
-      pickOne = math.random(1, 20)
-    end
+  if DG.db.profile.testMode == true then
+    print("DadGratz:pickGratz")
   end
-  if DadGratz.db.profile.testMode == true then
-    print("PickOne: " .. pickOne)
+
+  local gratzType = {
+    "Dad",
+    "Nice",
+  }
+  if DG.db.profile.weight.dad == 0 then
+    table.insert(gratzType, "Dad")
+  elseif DG.db.profile.weight.dad == 1 then
+    table.insert(gratzType, "Dad")
+    table.insert(gratzType, "Dad")
   end
   
-  if pickOne >= 1 and pickOne <= 10 then
-    gratzTable = "gratzNice"
-  elseif pickOne >= 11 and pickOne <= 20 then
-    gratzTable = "gratzDad"
-  elseif pickOne >= 21 and pickOne <= 30 then
-    gratzTable = "gratzNaughty"
-  elseif pickOne >= 31 and pickOne <= 40 then
-    gratzTable = "gratzDark"
+  if DG.db.profile.weight.nice == 0 then
+    table.insert(gratzType, "Nice")
+  elseif DG.db.profile.weight.nice == 1 then
+    table.insert(gratzType, "Nice")
+    table.insert(gratzType, "Nice")
   end
-  if DadGratz.db.profile.testMode == true then
+  
+  if DG.db.profile.doCustom == true then
+    table.insert(gratzType, "Custom")
+    if DG.db.profile.weight.custom == 0 then
+      table.insert(gratzType, "Custom")
+    elseif DG.db.profile.weight.dad == 1 then
+      table.insert(gratzType, "Custom")
+      table.insert(gratzType, "Custom")
+    end
+  end
+
+  if DG.db.profile.doNaughty == true then
+    table.insert(gratzType, "Naughty")
+    if DG.db.profile.weight.naughty == 0 then
+      table.insert(gratzType, "Naughty")
+    elseif DG.db.profile.weight.dad == 1 then
+      table.insert(gratzType, "Naughty")
+      table.insert(gratzType, "Naughty")
+    end
+  end
+
+  if DG.db.profile.doDark == true then
+    table.insert(gratzType, "Dark")
+    if DG.db.profile.weight.custom == 0 then
+      table.insert(gratzType, "Dark")
+    elseif DG.db.profile.weight.dad == 1 then
+      table.insert(gratzType, "Dark")
+      table.insert(gratzType, "Dark")
+    end
+  end
+  
+  if DG.db.profile.testMode == true then
+    for k, v in pairs(gratzType) do
+      print(k .. ": " .. v)
+    end
+  end
+  
+  local typeN = DadGratz:TableLength(gratzType)
+  local typePick = math.random(1, typeN)
+  if DG.db.profile.testMode == true then
+    print("Pick: " .. typePick)
+  end
+  local gratzTable = "gratz" .. gratzType[typePick]
+  
+  if DG.db.profile.testMode == true then
     print("")
     print("======================")
     print("GratzTable: " .. gratzTable)
   end
-
-  local gratzSize = DadGratz:TableLength(L[gratzTable])
-  if DadGratz.db.profile.testMode == true then
-    print("GratzSize: " .. gratzSize)
+  
+  if gratzTable == "gratzCustom" then
+    local gratzSize = DadGratz:TableLength(DG.db.profile.customGratz)
+    if DG.db.profile.testMode == true then
+      print("GratzSize: " .. gratzSize)
+    end
+    local gratzRand = math.random(1, gratzSize)
+    if DG.db.profile.testMode == true then
+      print("GratzRand: " .. gratzRand)
+    end
+    gratz = DadGratz:FindGratz(DG.db.profile.customGratz, gratzRand)
+    if DG.db.profile.testMode == true then
+      print("Gratz:")
+      print(string.format(gratz, guildy))
+    end
+  else
+    local gratzSize = DadGratz:TableLength(L[gratzTable])
+    if DG.db.profile.testMode == true then
+      print("GratzSize: " .. gratzSize)
+    end
+    local gratzRand = math.random(1, gratzSize)
+    if DG.db.profile.testMode == true then
+      print("GratzRand: " .. gratzRand)
+    end
+    gratz = DadGratz:FindGratz(L[gratzTable], gratzRand)
+    if DG.db.profile.testMode == true then
+      print("Gratz:")
+      print(string.format(gratz, guildy))
+    end
   end
   
-  local gratzRand = math.random(1, gratzSize)
-  if DadGratz.db.profile.testMode == true then
-    print("GratzRand: " .. gratzRand)
-  end
-  
-  gratz = DadGratz:FindGratz(L[gratzTable], gratzRand)
-  if DadGratz.db.profile.testMode == true then
-    print("Gratz:")
-    print(string.format(gratz, guildy))
-  end
-  
-  if DadGratz.db.profile.testMode == false then
+  if DG.db.profile.testMode == false then
     DadGratz:SendMessage(string.format(gratz, guildy), guildy, "GUILD")
   end
-  if DadGratz.db.profile.testMode == true then
+
+  if DG.db.profile.testMode == true then
     print("======================")
     print("")
   end
@@ -347,7 +576,7 @@ end
 
 function DadGratz:LastRunCheck()
 	local Current = time()
-	local Past = (DadGratz.db.global.lastRun + DadGratz.db.global.lockOutTime)
+	local Past = (DG.db.global.lastRun + DG.db.global.lockOutTime)
 	if Current > Past then
 		return L["Yes"]
 	else

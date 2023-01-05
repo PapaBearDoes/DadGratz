@@ -14,7 +14,8 @@ local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "ptBR")
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
 -- ptBR Localization
---@localization(locale="ptBR", format="lua_additive_table", handle-unlocalized = "comment", same-key-is-true=true, handle-subnamespaces="subtable")@
+--@localization(locale="ptBR", format="lua_additive_table", handle-unlocalized="comment", same-key-is-true=true, handle-subnamespaces="subtable")@
+
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@

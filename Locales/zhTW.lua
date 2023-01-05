@@ -14,7 +14,8 @@ local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "zhTW")
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
 -- zhTW Localization
---@localization(locale="zhTW", format="lua_additive_table", handle-unlocalized = "comment", same-key-is-true=true, handle-subnamespaces="subtable")@
+--@localization(locale="zhTW", format="lua_additive_table", handle-unlocalized="comment", same-key-is-true=true, handle-subnamespaces="subtable")@
+
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@

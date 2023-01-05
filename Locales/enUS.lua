@@ -14,7 +14,8 @@ local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "enUS", true)
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
 -- enUS Localization
---@localization(locale="enUS", format="lua_additive_table", handle-unlocalized = "comment", same-key-is-true=true, handle-subnamespaces="subtable")@
+--@localization(locale="enUS", format="lua_additive_table", handle-unlocalized="comment", same-key-is-true=true, handle-subnamespaces="subtable")@
+
 --@do-not-package@
 -- L["identifier"] = "translation"
 L = L or {}
@@ -25,12 +26,11 @@ L["DarkGratzEnabled"] = "Dark Humor Gratz enabled."
 L["DarkOnly"] = "Dark Only"
 L["disabled"] = true
 L["DoDarkGratz"] = "Do Dark Humor Gratz"
-L["DoDarkGratzToggle"] = "Do Dark Humor Gratz"
+L["DoDarkGratzDesc"] = "Do Dark Humor Gratz"
 L["DoNaughtyGratz"] = "Do Naughty Gratz"
-L["DoNaughtyGratzToggle"] = "Do Naughty Gratz"
+L["DoNaughtyGratzDesc"] = "Do Naughty Gratz"
 L["enabled"] = true
 L["everyone"] = true
-L["general"] = true
 L["GeneralSettings"] = "General Settings"
 L["GratzOptions"] = "Gratz Options"
 L["GuildAchievementReceived"] = "Guild Achievement Received"
@@ -43,7 +43,6 @@ L["NaughtyGratzEnabled"] = "Naughty Gratz enabled."
 L["NaughtyOnly"] = "Naughty Only"
 L["Neither"] = true
 L["No"] = true
-L["profile"] = true
 L["Profiles"] = true
 L["RightClick"] = "Right Click"
 L["RightClickToolTip"] = " to configure addon."
@@ -52,6 +51,32 @@ L["ShowMinimapButtonDesc"] = "Show Minimap Button"
 L["TestModeEnabled"] = "Test Mode Enabled"
 L["triggering"] = true
 L["Yes"] = true
+
+L["DoCustomGratz"] = "Do Custom Gratz"
+L["DoCustomGratzDesc"] = "Do Custom Gratz"
+L["CustomGratzDisabled"] = "Custom Gratz disabled."
+L["CustomGratzEnabled"] = "Custom Gratz enabled."
+L["CustomGratz"] = "Custom Gratz"
+L["CustomGratzSettings"] = "Custom Gratz Settings"
+L["AddCustomGratz"] = "Add Custom Gratz"
+L["AddCustomGratzDesc"] = "Add Custom Gratz Desc"
+L["ListCustomGratz"] = "List Custom Gratz"
+L["ListCustomGratzDesc"] = "Click the gratz you wish to delete, a confirmation window will appear. (THIS IS PERMANENT!!!)"
+L["DelCustomGratz"] = "List Custom Gratz"
+L["DelCustomGratzDesc"] = "Click the gratz you wish to delete, a confirmation window will appear. (THIS IS PERMANENT!!!)"
+L["BuiltinWeights"] = "Builtin Gratz Weights"
+L["GratzWeights"] = "Gratz Weights"
+L["DadWeight"] = "Dad Gratz Weight"
+L["DadWeightDesc"] = "Dad Gratz Weight Description"
+L["NiceWeight"] = "Nice Gratz Weight"
+L["NiceWeightDesc"] = "Nice Gratz Weight Description"
+L["CustomWeight"] = "Custom Gratz Weight"
+L["CustomWeightDesc"] = "Custom Gratz Weight Description"
+L["NaughtyWeight"] = "Naughty Gratz Weight"
+L["NaughtyWeightDesc"] = "Naughty Gratz Weight Description"
+L["DarkWeight"] = "Dark Gratz Weight"
+L["DarkWeightDesc"] = "Dark Gratz Weight Description"
+
 
 L["gratzDad"] = {
 	["%s was addicted to soap ... they're clean now though."] = true,
