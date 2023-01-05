@@ -14,7 +14,8 @@ local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "deDE")
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
 -- deDE Localization
---@localization(locale="deDE", format="lua_additive_table", handle-unlocalized = "comment", same-key-is-true=true, handle-subnamespaces="subtable")@
+--@localization(locale="deDE", format="lua_additive_table", handle-unlocalized="comment", same-key-is-true=true, handle-subnamespaces="subtable")@
+
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@
