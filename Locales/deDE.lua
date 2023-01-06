@@ -138,12 +138,15 @@ local L = L or {}
 --[[ L["triggering"] = "triggering"--]] 
 --[[Translation missing --]]
 --[[ L["Yes"] = "Yes"--]] 
+
 --@end-do-not-package@
 L["gratzDad"] = {
 --[[Translation missing --]]
 	--[[ ["%s was addicted to soap ... they're clean now though."] = "%s was addicted to soap ... they're clean now though.",--]] 
 --[[Translation missing --]]
 	--[[ ["Hello %s's achievement. I'm Dad."] = "Hello %s's achievement. I'm Dad.",--]] 
+--[[Translation missing --]]
+	--[[ ["I totally predicted %s's achievement there!"] = "I totally predicted %s's achievement there!",--]] 
 --[[Translation missing --]]
 	--[[ ["I was wondering why %s's achievements kept getting bigger and bigger ... then it hit me."] = "I was wondering why %s's achievements kept getting bigger and bigger ... then it hit me.",--]] 
 --[[Translation missing --]]
@@ -154,16 +157,40 @@ L["gratzDark"] = {
 --[[Translation missing --]]
 	--[[ ["Austria's biggest achievement was convincing the world that Hitler was German ... what's yours %s?"] = "Austria's biggest achievement was convincing the world that Hitler was German ... what's yours %s?",--]] 
 --[[Translation missing --]]
+	--[[ ["I thought about telling a dead baby joke for that achievement, but then decided it was best to abort."] = "I thought about telling a dead baby joke for that achievement, but then decided it was best to abort.",--]] 
+--[[Translation missing --]]
+	--[[ ["If you think I'd joke about %s's achievements and their dementia, you can just forget about it."] = "If you think I'd joke about %s's achievements and their dementia, you can just forget about it.",--]] 
+--[[Translation missing --]]
+	--[[ ["Much like a blind person telling their partner they are seeing someone ... that acheivement was either great ... or really bad."] = "Much like a blind person telling their partner they are seeing someone ... that acheivement was either great ... or really bad.",--]] 
+--[[Translation missing --]]
 	--[[ ["Much like the rest of American Gen Z who are alive, %s survived that achievement without getting shot ..."] = "Much like the rest of American Gen Z who are alive, %s survived that achievement without getting shot ...",--]] 
+--[[Translation missing --]]
+	--[[ ["'One man's trash is another man's achievement' is a wonderful saying ... but a really bad way of finding out you were adopted."] = "'One man's trash is another man's achievement' is a wonderful saying ... but a really bad way of finding out you were adopted.",--]] 
+--[[Translation missing --]]
+	--[[ ["That achievement is like food; not everyone gets it."] = "That achievement is like food; not everyone gets it.",--]] 
 }
 
 L["gratzNaughty"] = {
 --[[Translation missing --]]
+	--[[ ["%s stole a bunch of viagra and that achievement from the drugstore. Now they're a hardened criminal."] = "%s stole a bunch of viagra and that achievement from the drugstore. Now they're a hardened criminal.",--]] 
+--[[Translation missing --]]
+	--[[ ["Continue to collect achievements like that %s, and you'll be a cunning linguist in no time!"] = "Continue to collect achievements like that %s, and you'll be a cunning linguist in no time!",--]] 
+--[[Translation missing --]]
+	--[[ ["How does one tell the difference between %s, and a submissive? Ask them what a Dungeon Master is ..."] = "How does one tell the difference between %s, and a submissive? Ask them what a Dungeon Master is ...",--]] 
+--[[Translation missing --]]
 	--[[ ["Is that an achievement you got there %s, or are you just happy to see me?"] = "Is that an achievement you got there %s, or are you just happy to see me?",--]] 
+--[[Translation missing --]]
+	--[[ ["Kinky is playfully reminding your partner that the soft achievements can be used for tickles ... Perverted is slapping them with that achievement."] = "Kinky is playfully reminding your partner that the soft achievements can be used for tickles ... Perverted is slapping them with that achievement.",--]] 
+--[[Translation missing --]]
+	--[[ ["Much like achievement hunting, one never knows exactly where to look when eating a banana. Congrats, %s!"] = "Much like achievement hunting, one never knows exactly where to look when eating a banana. Congrats, %s!",--]] 
 --[[Translation missing --]]
 	--[[ ["Ooo, such a *big* achievement, %s. You're such a good player."] = "Ooo, such a *big* achievement, %s. You're such a good player.",--]] 
 --[[Translation missing --]]
 	--[[ ["That's very good of you, %s. You're such a good player. Come sit by me and tell me all about it like the good player you are."] = "That's very good of you, %s. You're such a good player. Come sit by me and tell me all about it like the good player you are.",--]] 
+--[[Translation missing --]]
+	--[[ ["These achievement jokes cum pretty easy once you get going ..."] = "These achievement jokes cum pretty easy once you get going ...",--]] 
+--[[Translation missing --]]
+	--[[ ["We had %s pegged from the beginning. Congrats!"] = "We had %s pegged from the beginning. Congrats!",--]] 
 }
 
 L["gratzNice"] = {
@@ -418,7 +445,6 @@ L["gratzNice"] = {
 --[[Translation missing --]]
 	--[[ ["Your efforts have not gone un-noticed, congratulations, %s! :D"] = "Your efforts have not gone un-noticed, congratulations, %s! :D",--]] 
 }
-
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@
