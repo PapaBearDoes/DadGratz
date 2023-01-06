@@ -9,40 +9,67 @@
      ######################################################################## ]]
 --   ## Let's init this file shall we?
 -- Imports
-local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "enUS", true)
+local me, ns = ...
+local L = LibStub("AceLocale-3.0"):NewLocale(me, "enUS", true)
+local L = L or {}
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
 -- enUS Localization
---@localization(locale="enUS", format="lua_additive_table", handle-unlocalized="comment", same-key-is-true=true, handle-subnamespaces="subtable")@
-
+--@localization(locale="enUS", format="lua_additive_table", same-key-is-true=true, handle-subnamespaces="subtable")@
 --@do-not-package@
--- L["identifier"] = "translation"
-L = L or {}
+L["AddCustomGratz"] = "Add Custom Gratz"
+L["AddCustomGratzDesc"] = "Add Custom Gratz Desc"
 L["AddonName"] = "DadGratz"
+L["BuiltinWeights"] = "Builtin Gratz Weights"
+L["CustomGratz"] = "Custom Gratz"
+L["CustomGratzDisabled"] = "Custom Gratz disabled."
+L["CustomGratzEnabled"] = "Custom Gratz enabled."
+L["CustomGratzSettings"] = "Custom Gratz Settings"
+L["CustomWeight"] = "Custom Gratz Weight"
+L["CustomWeightDesc"] = "Custom Gratz Weight Description"
+L["DadWeight"] = "Dad Gratz Weight"
+L["DadWeightDesc"] = "Dad Gratz Weight Description"
 L["DarkGratz"] = "Dark Humor Gratz"
 L["DarkGratzDisabled"] = "Dark Humor Gratz disabled."
 L["DarkGratzEnabled"] = "Dark Humor Gratz enabled."
 L["DarkOnly"] = "Dark Only"
+L["DarkWeight"] = "Dark Gratz Weight"
+L["DarkWeightDesc"] = "Dark Gratz Weight Description"
+L["DelCustomGratz"] = "List Custom Gratz"
+L["DelCustomGratzDesc"] = "Click the gratz you wish to delete, a confirmation window will appear. (THIS IS PERMANENT!!!)"
 L["disabled"] = true
+L["DoCustomGratz"] = "Do Custom Gratz"
+L["DoCustomGratzDesc"] = "Do Custom Gratz"
 L["DoDarkGratz"] = "Do Dark Humor Gratz"
-L["DoDarkGratzDesc"] = "Do Dark Humor Gratz"
+L["DoDarkGratzDesc"] = "Do Dark Humor Gratz Description"
+L["DoDarkGratzToggle"] = "Do Dark Humor Gratz"
 L["DoNaughtyGratz"] = "Do Naughty Gratz"
-L["DoNaughtyGratzDesc"] = "Do Naughty Gratz"
+L["DoNaughtyGratzDesc"] = "Do Naughty Gratz Description"
+L["DoNaughtyGratzToggle"] = "Do Naughty Gratz"
 L["enabled"] = true
 L["everyone"] = true
+L["general"] = true
 L["GeneralSettings"] = "General Settings"
 L["GratzOptions"] = "Gratz Options"
+L["GratzWeights"] = "Gratz Weights"
 L["GuildAchievementReceived"] = "Guild Achievement Received"
 L["GuildMessageReceived"] = "Guild Message Received"
+L["ListCustomGratz"] = "List Custom Gratz"
+L["ListCustomGratzDesc"] = "Click the gratz you wish to delete, a confirmation window will appear. (THIS IS PERMANENT!!!)"
 L["MyAchievement"] = "That's my achievement, not responding."
 L["NaughtyAndDark"] = "Naughty and Dark"
 L["NaughtyGratz"] = "Naughty Gratz"
 L["NaughtyGratzDisabled"] = "Naughty Gratz disabled."
 L["NaughtyGratzEnabled"] = "Naughty Gratz enabled."
 L["NaughtyOnly"] = "Naughty Only"
+L["NaughtyWeight"] = "Naughty Gratz Weight"
+L["NaughtyWeightDesc"] = "Naughty Gratz Weight Description"
 L["Neither"] = true
+L["NiceWeight"] = "Nice Gratz Weight"
+L["NiceWeightDesc"] = "Nice Gratz Weight Description"
 L["No"] = true
+L["profile"] = true
 L["Profiles"] = true
 L["RightClick"] = "Right Click"
 L["RightClickToolTip"] = " to configure addon."
@@ -51,33 +78,7 @@ L["ShowMinimapButtonDesc"] = "Show Minimap Button"
 L["TestModeEnabled"] = "Test Mode Enabled"
 L["triggering"] = true
 L["Yes"] = true
-
-L["DoCustomGratz"] = "Do Custom Gratz"
-L["DoCustomGratzDesc"] = "Do Custom Gratz"
-L["CustomGratzDisabled"] = "Custom Gratz disabled."
-L["CustomGratzEnabled"] = "Custom Gratz enabled."
-L["CustomGratz"] = "Custom Gratz"
-L["CustomGratzSettings"] = "Custom Gratz Settings"
-L["AddCustomGratz"] = "Add Custom Gratz"
-L["AddCustomGratzDesc"] = "Add Custom Gratz Desc"
-L["ListCustomGratz"] = "List Custom Gratz"
-L["ListCustomGratzDesc"] = "Click the gratz you wish to delete, a confirmation window will appear. (THIS IS PERMANENT!!!)"
-L["DelCustomGratz"] = "List Custom Gratz"
-L["DelCustomGratzDesc"] = "Click the gratz you wish to delete, a confirmation window will appear. (THIS IS PERMANENT!!!)"
-L["BuiltinWeights"] = "Builtin Gratz Weights"
-L["GratzWeights"] = "Gratz Weights"
-L["DadWeight"] = "Dad Gratz Weight"
-L["DadWeightDesc"] = "Dad Gratz Weight Description"
-L["NiceWeight"] = "Nice Gratz Weight"
-L["NiceWeightDesc"] = "Nice Gratz Weight Description"
-L["CustomWeight"] = "Custom Gratz Weight"
-L["CustomWeightDesc"] = "Custom Gratz Weight Description"
-L["NaughtyWeight"] = "Naughty Gratz Weight"
-L["NaughtyWeightDesc"] = "Naughty Gratz Weight Description"
-L["DarkWeight"] = "Dark Gratz Weight"
-L["DarkWeightDesc"] = "Dark Gratz Weight Description"
-
-
+--@end-do-not-package@
 L["gratzDad"] = {
 	["%s was addicted to soap ... they're clean now though."] = true,
 	["Hello %s's achievement. I'm Dad."] = true,
@@ -223,7 +224,6 @@ L["gratzNice"] = {
 	["Your achievement will resonate through time and space with grace, %s!"] = true,
 	["Your efforts have not gone un-noticed, congratulations, %s! :D"] = true,
 }
---@end-do-not-package@
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@

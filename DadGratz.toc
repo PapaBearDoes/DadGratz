@@ -20,6 +20,7 @@
 ## X-Category: Guild, Achievements, Boss Encounters, Chat & Communications, Miscellaneous
 ## X-License: All Rights Reserved: You are free to fork and modify on GitHub, please ask about anything else.
 ## X-Website: https://github.com/PapaBearDoes/DadGratz
+## X-Discord: https://discord.alphabetcartel.org
 ## X-Curse-Project-ID: 415498
 
 # Functionality
@@ -35,3 +36,6 @@ Locales\locales.xml
 
 # Load Main file(s)
 DadGratz.lua
+
+# Load Includes
+Includes\includes.xml
