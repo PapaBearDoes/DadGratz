@@ -1,4 +1,1 @@
-Get Config UI working.
 Choice to have responses automated or not.
-Automated responses should fire at a random interval (between 1 and 5 seconds) after receiving the event that triggers a "Gratz"
-Configurable types of events that should fire a response.

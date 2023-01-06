@@ -9,15 +9,13 @@
      ######################################################################## ]]
 --   ## Let's init this file shall we?
 -- Imports
-local me, ns = ...
-local L = LibStub("AceLocale-3.0"):NewLocale(me, "enUS", true)
+local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "enUS", true)
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
 -- enUS Localization
 --@localization(locale="enUS", format="lua_additive_table", same-key-is-true=true, handle-subnamespaces="subtable")@
-
-local L = L or {}
+--@do-not-package@
 L["AddCustomGratz"] = "Add Custom Gratz"
 L["AddCustomGratzDesc"] = "Add Custom Gratz Desc"
 L["AddonName"] = "DadGratz"
@@ -78,7 +76,7 @@ L["ShowMinimapButtonDesc"] = "Show Minimap Button"
 L["TestModeEnabled"] = "Test Mode Enabled"
 L["triggering"] = true
 L["Yes"] = true
-
+--@end-do-not-package@
 L["gratzDad"] = {
 	["%s was addicted to soap ... they're clean now though."] = true,
 	["Hello %s's achievement. I'm Dad."] = true,
