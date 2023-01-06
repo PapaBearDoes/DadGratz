@@ -17,9 +17,6 @@ local L = LibStub("AceLocale-3.0"):NewLocale(me, "enUS", true)
 -- enUS Localization
 --@localization(locale="enUS", format="lua_additive_table", same-key-is-true=true, handle-subnamespaces="subtable")@
 
---@do-not-package@
--- L["identifier"] = "translation"
-L = L or {}
 L["AddCustomGratz"] = "Add Custom Gratz"
 L["AddCustomGratzDesc"] = "Add Custom Gratz Desc"
 L["AddonName"] = "DadGratz"
@@ -226,7 +223,6 @@ L["gratzNice"] = {
 	["Your achievement will resonate through time and space with grace, %s!"] = true,
 	["Your efforts have not gone un-noticed, congratulations, %s! :D"] = true,
 }
---@end-do-not-package@
 --[[
      ########################################################################
      |  Last Editted By: @file-author@ - @file-date-iso@
