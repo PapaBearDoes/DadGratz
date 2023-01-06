@@ -17,6 +17,7 @@ local L = LibStub("AceLocale-3.0"):NewLocale(me, "zhTW")
 -- zhTW Localization
 --@localization(locale="zhTW", format="lua_additive_table", same-key-is-true=true, handle-subnamespaces="subtable")@
 
+local L = L or {}
 --[[Translation missing --]]
 --[[ L["AddCustomGratz"] = "Add Custom Gratz"--]] 
 --[[Translation missing --]]

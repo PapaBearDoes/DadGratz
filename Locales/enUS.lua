@@ -17,6 +17,7 @@ local L = LibStub("AceLocale-3.0"):NewLocale(me, "enUS", true)
 -- enUS Localization
 --@localization(locale="enUS", format="lua_additive_table", same-key-is-true=true, handle-subnamespaces="subtable")@
 
+local L = L or {}
 L["AddCustomGratz"] = "Add Custom Gratz"
 L["AddCustomGratzDesc"] = "Add Custom Gratz Desc"
 L["AddonName"] = "DadGratz"
