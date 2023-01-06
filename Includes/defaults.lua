@@ -9,13 +9,37 @@
      ######################################################################## ]]
 --   ## Let's init this file shall we?
 -- Imports
+local _G = _G
 local me, ns = ...
-local L = LibStub("AceLocale-3.0"):NewLocale(me, "deDE")
+local DadGratz = ns
+local L = DadGratz:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
--- deDE Localization
---@localization(locale="deDE", format="lua_additive_table", same-key-is-true=true, handle-subnamespaces="subtable")@
+-- Create DB defaults
+DadGratz.dbDefaults = {
+  global = {
+    cheevoCount = 0,
+  },
+  profile = {
+    testMode = false,
+    weight = {
+      dad = 0,
+      nice = 0,
+      custom = 0,
+      naughty = 0,
+      dark = 0,
+    },
+    doNaughty = true,
+    doDark = true,
+    doCustom = true,
+    mmIcon = {
+      hide = false,
+      minimapPos = 205,
+    },
+    customGratz = {},
+  },
+}
 
 --[[
      ########################################################################

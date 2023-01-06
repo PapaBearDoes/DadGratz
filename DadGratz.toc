@@ -35,3 +35,6 @@ Locales\locales.xml
 
 # Load Main file(s)
 DadGratz.lua
+
+# Load Includes
+Includes\includes.xml
