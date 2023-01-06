@@ -9,7 +9,9 @@
      ######################################################################## ]]
 --   ## Let's init this file shall we?
 -- Imports
-local L = LibStub("AceLocale-3.0"):NewLocale("DadGratz", "zhTW")
+local me, ns = ...
+local L = LibStub("AceLocale-3.0"):NewLocale(me, "zhTW")
+local L = L or {}
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
