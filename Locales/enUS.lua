@@ -84,17 +84,30 @@ L["gratzDad"] = {
 	["Hello %s's achievement. I'm Dad."] = true,
 	["I was wondering why %s's achievements kept getting bigger and bigger ... then it hit me."] = true,
 	["Two of %s's achievements walked into a bar. The third ducked."] = true,
+  ["I totally predicted %s's achievement there!"] = true,
 }
 
 L["gratzDark"] = {
 	["Austria's biggest achievement was convincing the world that Hitler was German ... what's yours %s?"] = true,
 	["Much like the rest of American Gen Z who are alive, %s survived that achievement without getting shot ..."] = true,
+  ["If you think I'd joke about %s's achievements and their dementia, you can just forget about it."] = true,
+  ["Much like a blind person telling their partner they are seeing someone ... that acheivement was either great ... or really bad."] = true,
+  ["'One man's trash is another man's achievement' is a wonderful saying ... but a really bad way of finding out you were adopted."] = true,
+  ["I thought about telling a dead baby joke for that achievement, but then decided it was best to abort."] = true,
+  ["That achievement is like food; not everyone gets it."] = true,
 }
 
 L["gratzNaughty"] = {
 	["Is that an achievement you got there %s, or are you just happy to see me?"] = true,
 	["Ooo, such a *big* achievement, %s. You're such a good player."] = true,
 	["That's very good of you, %s. You're such a good player. Come sit by me and tell me all about it like the good player you are."] = true,
+  ["%s stole a bunch of viagra and that achievement from the drugstore. Now they're a hardened criminal."] = true,
+  ["Kinky is playfully reminding your partner that the soft achievements can be used for tickles ... Perverted is slapping them with that achievement."] = true,
+  ["Much like achievement hunting, one never knows exactly where to look when eating a banana. Congrats, %s!"] = true,
+  ["How does one tell the difference between %s, and a submissive? Ask them what a Dungeon Master is ..."] = true,
+  ["We had %s pegged from the beginning. Congrats!"] = true,
+  ["These achievement jokes cum pretty easy once you get going ..."] = true,
+  ["Continue to collect achievements like that %s, and you'll be a cunning linguist in no time!"] = true,
 }
 
 L["gratzNice"] = {
