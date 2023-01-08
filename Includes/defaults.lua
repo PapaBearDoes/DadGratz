@@ -30,8 +30,8 @@ DadGratz.dbDefaults = {
       naughty = 0,
       dark = 0,
     },
-    doNaughty = true,
-    doDark = true,
+    doNaughty = false,
+    doDark = false,
     doCustom = true,
     mmIcon = {
       hide = false,
