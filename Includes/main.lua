@@ -20,8 +20,8 @@ function DadGratz:TriggeredEvent(message, recipient, channel)
   DadGratz.db.global.cheevoCount = DadGratz.db.global.cheevoCount + 1
 
   if DadGratz.db.profile.testMode == true then
-    print("DadGratz:TriggeredEvent")
-    print("Cheevo Count: " .. DadGratz.db.global.cheevoCount)
+    DadGratz:Print("DadGratz:TriggeredEvent")
+    DadGratz:Print("Cheevo Count: " .. DadGratz.db.global.cheevoCount)
   end
 
   if DadGratz.db.global.cheevoCount < 2 then
@@ -31,16 +31,16 @@ end
 
 function DadGratz:Process(message, recipient, channel)
   if DadGratz.db.profile.testMode == true then
-    print("DadGratz:Process")
+    DadGratz:Print("DadGratz:Process")
   end
   local s, e = string.find(recipient, "[^-]+")
   local guildy = string.sub(recipient, 1, e)
   
   if UnitName("player") == guildy then
-    print(L["AddonName"] .. ": " .. L["MyAchievement"])
+    DadGratz:Print(L["AddonName"] .. ": " .. L["MyAchievement"])
     if DadGratz.db.profile.testMode == true then
       local delay = math.random(1, 10)
-      print("Delay: " .. delay)
+      DadGratz:Print("Delay: " .. delay)
       DadGratz:ScheduleTimer("pickGratz", delay, guildy)
     end
   else
@@ -50,7 +50,7 @@ function DadGratz:Process(message, recipient, channel)
 
     local delay = math.random(1, 10)
     if DadGratz.db.profile.testMode == true then
-      print("Delay: " .. delay)
+      DadGratz:Print("Delay: " .. delay)
     end
     DadGratz:ScheduleTimer("pickGratz", delay, guildy)
   end
@@ -59,7 +59,7 @@ end
 
 function DadGratz:pickGratz(guildy)
   if DadGratz.db.profile.testMode == true then
-    print("DadGratz:pickGratz")
+    DadGratz:Print("DadGratz:pickGratz")
   end
 
   local gratzType = {
@@ -112,50 +112,49 @@ function DadGratz:pickGratz(guildy)
   
   if DadGratz.db.profile.testMode == true then
     for k, v in pairs(gratzType) do
-      print(k .. ": " .. v)
+      DadGratz:Print(k .. ": " .. v)
     end
   end
   
   local typeN = DadGratz:TableLength(gratzType)
   local typePick = math.random(1, typeN)
   if DadGratz.db.profile.testMode == true then
-    print("Pick: " .. typePick)
+    DadGratz:Print("Pick: " .. typePick)
   end
   local gratzTable = "gratz" .. gratzType[typePick]
   
   if DadGratz.db.profile.testMode == true then
-    print("")
-    print("======================")
-    print("GratzTable: " .. gratzTable)
+    DadGratz:Print("======================")
+    DadGratz:Print("GratzTable: " .. gratzTable)
   end
   
   if gratzTable == "gratzCustom" then
     local gratzSize = DadGratz:TableLength(DadGratz.db.profile.customGratz)
     if DadGratz.db.profile.testMode == true then
-      print("GratzSize: " .. gratzSize)
+      DadGratz:Print("GratzSize: " .. gratzSize)
     end
     local gratzRand = math.random(1, gratzSize)
     if DadGratz.db.profile.testMode == true then
-      print("GratzRand: " .. gratzRand)
+      DadGratz:Print("GratzRand: " .. gratzRand)
     end
     gratz = DadGratz:FindGratz(DadGratz.db.profile.customGratz, gratzRand)
     if DadGratz.db.profile.testMode == true then
-      print("Gratz:")
-      print(string.format(gratz, guildy))
+      DadGratz:Print("Gratz:")
+      DadGratz:Print(string.format(gratz, guildy))
     end
   else
     local gratzSize = DadGratz:TableLength(L[gratzTable])
     if DadGratz.db.profile.testMode == true then
-      print("GratzSize: " .. gratzSize)
+      DadGratz:Print("GratzSize: " .. gratzSize)
     end
     local gratzRand = math.random(1, gratzSize)
     if DadGratz.db.profile.testMode == true then
-      print("GratzRand: " .. gratzRand)
+      DadGratz:Print("GratzRand: " .. gratzRand)
     end
     gratz = DadGratz:FindGratz(L[gratzTable], gratzRand)
     if DadGratz.db.profile.testMode == true then
-      print("Gratz:")
-      print(string.format(gratz, guildy))
+      DadGratz:Print("Gratz:")
+      DadGratz:Print(string.format(gratz, guildy))
     end
   end
   
@@ -164,8 +163,7 @@ function DadGratz:pickGratz(guildy)
   end
 
   if DadGratz.db.profile.testMode == true then
-    print("======================")
-    print("")
+    DadGratz:Print("======================")
   end
 end
 --[[
