@@ -33,7 +33,7 @@ function DadGratz:OnInitialize()
   DadGratz.options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(DadGratz.db)
   LibStub("AceConfig-3.0"):RegisterOptionsTable(me, DadGratz.options, nil)
   
-  if DadGratz.db.profile.testMode == true then
+  if DadGratz.db.profile.debug == true then
     DadGratz:RegisterEvent("CHAT_MSG_GUILD")
     -- [[ Start using AceBuckets for the achievement events instead of having to do cheevoCount ]]
     DadGratz:RegisterBucketEvent("CHAT_MSG_ACHIEVEMENT", 5, "BucketFire") --DadGratz:CHAT_MSG_GUILD_ACHIEVEMENT)
@@ -48,11 +48,12 @@ function DadGratz:OnInitialize()
   
   DadGratz:MiniMapIcon()
   
+  DadGratz.db.global.cheevoCount = 0
+
   DadGratz:Print(L["AddonLoaded"])
-  if DadGratz.db.profile.testMode == true then
+  if DadGratz.db.profile.debug == true then
     DadGratz:Print(L["TestModeEnabled"])
   end
-  DadGratz.db.global.cheevoCount = 0
 end
 
 function DadGratz:OnEnable()
