@@ -22,7 +22,7 @@ DadGratz.dbDefaults = {
     cheevoCount = 0,
   },
   profile = {
-    testMode = false,
+    testMode = true,
     weight = {
       dad = 0,
       nice = 0,
