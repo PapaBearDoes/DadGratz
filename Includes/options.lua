@@ -222,7 +222,7 @@ DadGratz.options = {
             return
           end,
           set = function(key, value)
-            print("Value: " .. value)
+            DadGratz:Print("Value: " .. value)
             DadGratz.db.profile.customGratz[value] = value
             local n = DadGratz:TableLength(DadGratz.db.profile.customGratz)
             if n > 0 then
@@ -247,7 +247,7 @@ DadGratz.options = {
           get = function()
           end,
           set = function(key, value)
-            print("Delete: " .. value .. " - CONFIRMED")
+            DadGratz:Print("Delete: " .. value .. " - CONFIRMED")
             DadGratz.db.profile.customGratz[value] = nil
             local n = DadGratz:TableLength(DadGratz.db.profile.customGratz)
             if n == 0 or n < 1 or n == nil then
