@@ -21,6 +21,7 @@ local L = L or {}
 L["AddCustomGratz"] = "Add Custom Gratz"
 L["AddCustomGratzDesc"] = "Add Custom Gratz Desc"
 L["AddonName"] = "DadGratz"
+L["AddonLoaded"] = "Addon Loaded"
 L["BuiltinWeights"] = "Builtin Gratz Weights"
 L["CustomGratz"] = "Custom Gratz"
 L["CustomGratzDisabled"] = "Custom Gratz disabled."
