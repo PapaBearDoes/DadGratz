@@ -19,7 +19,7 @@ local L = DadGratz:GetLocale()
 function DadGratz:TriggeredEvent(message, recipient, channel)
   DadGratz.db.global.cheevoCount = DadGratz.db.global.cheevoCount + 1
 
-  if DadGratz.db.profile.testMode == true then
+  if DadGratz.db.profile.debug == true then
     DadGratz:Print("DadGratz:TriggeredEvent")
     DadGratz:Print("Cheevo Count: " .. DadGratz.db.global.cheevoCount)
   end
@@ -30,7 +30,7 @@ function DadGratz:TriggeredEvent(message, recipient, channel)
 end
 
 function DadGratz:Process(message, recipient, channel)
-  if DadGratz.db.profile.testMode == true then
+  if DadGratz.db.profile.debug == true then
     DadGratz:Print("DadGratz:Process")
   end
   local s, e = string.find(recipient, "[^-]+")
@@ -38,7 +38,7 @@ function DadGratz:Process(message, recipient, channel)
   
   if UnitName("player") == guildy then
     DadGratz:Print(L["AddonName"] .. ": " .. L["MyAchievement"])
-    if DadGratz.db.profile.testMode == true then
+    if DadGratz.db.profile.debug == true then
       local delay = math.random(1, 10)
       DadGratz:Print("Delay: " .. delay)
       DadGratz:ScheduleTimer("pickGratz", delay, guildy)
@@ -49,7 +49,7 @@ function DadGratz:Process(message, recipient, channel)
     end
 
     local delay = math.random(1, 10)
-    if DadGratz.db.profile.testMode == true then
+    if DadGratz.db.profile.debug == true then
       DadGratz:Print("Delay: " .. delay)
     end
     DadGratz:ScheduleTimer("pickGratz", delay, guildy)
@@ -58,7 +58,7 @@ function DadGratz:Process(message, recipient, channel)
 end
 
 function DadGratz:pickGratz(guildy)
-  if DadGratz.db.profile.testMode == true then
+  if DadGratz.db.profile.debug == true then
     DadGratz:Print("DadGratz:pickGratz")
   end
 
@@ -110,7 +110,7 @@ function DadGratz:pickGratz(guildy)
     end
   end
   
-  if DadGratz.db.profile.testMode == true then
+  if DadGratz.db.profile.debug == true then
     for k, v in pairs(gratzType) do
       DadGratz:Print(k .. ": " .. v)
     end
@@ -118,51 +118,51 @@ function DadGratz:pickGratz(guildy)
   
   local typeN = DadGratz:TableLength(gratzType)
   local typePick = math.random(1, typeN)
-  if DadGratz.db.profile.testMode == true then
+  if DadGratz.db.profile.debug == true then
     DadGratz:Print("Pick: " .. typePick)
   end
   local gratzTable = "gratz" .. gratzType[typePick]
   
-  if DadGratz.db.profile.testMode == true then
+  if DadGratz.db.profile.debug == true then
     DadGratz:Print("======================")
     DadGratz:Print("GratzTable: " .. gratzTable)
   end
   
   if gratzTable == "gratzCustom" then
     local gratzSize = DadGratz:TableLength(DadGratz.db.profile.customGratz)
-    if DadGratz.db.profile.testMode == true then
+    if DadGratz.db.profile.debug == true then
       DadGratz:Print("GratzSize: " .. gratzSize)
     end
     local gratzRand = math.random(1, gratzSize)
-    if DadGratz.db.profile.testMode == true then
+    if DadGratz.db.profile.debug == true then
       DadGratz:Print("GratzRand: " .. gratzRand)
     end
     gratz = DadGratz:FindGratz(DadGratz.db.profile.customGratz, gratzRand)
-    if DadGratz.db.profile.testMode == true then
+    if DadGratz.db.profile.debug == true then
       DadGratz:Print("Gratz:")
       DadGratz:Print(string.format(gratz, guildy))
     end
   else
     local gratzSize = DadGratz:TableLength(L[gratzTable])
-    if DadGratz.db.profile.testMode == true then
+    if DadGratz.db.profile.debug == true then
       DadGratz:Print("GratzSize: " .. gratzSize)
     end
     local gratzRand = math.random(1, gratzSize)
-    if DadGratz.db.profile.testMode == true then
+    if DadGratz.db.profile.debug == true then
       DadGratz:Print("GratzRand: " .. gratzRand)
     end
     gratz = DadGratz:FindGratz(L[gratzTable], gratzRand)
-    if DadGratz.db.profile.testMode == true then
+    if DadGratz.db.profile.debug == true then
       DadGratz:Print("Gratz:")
       DadGratz:Print(string.format(gratz, guildy))
     end
   end
   
-  if DadGratz.db.profile.testMode == false then
+  if DadGratz.db.profile.debug == false then
     DadGratz:SendMessage(string.format(gratz, guildy), guildy, "GUILD")
   end
 
-  if DadGratz.db.profile.testMode == true then
+  if DadGratz.db.profile.debug == true then
     DadGratz:Print("======================")
   end
 end
