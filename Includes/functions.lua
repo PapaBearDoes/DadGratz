@@ -17,10 +17,9 @@ local L = DadGratz:GetLocale()
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
 function DadGratz:CHAT_MSG_GUILD(_,MSG,Auth)
-  print("")
-  print("======================")
-  print(L["GuildMessageReceived"])
-  print(L["TestModeEnabled"] .. ", " .. L["triggering"] .. " ...")
+  DadGratz:Print("======================")
+  DadGratz:Print(L["GuildMessageReceived"])
+  DadGratz:Print(L["TestModeEnabled"] .. ", " .. L["triggering"] .. " ...")
   DadGratz:TriggeredEvent(MSG,Auth,"GUILD")
 end
 
