@@ -16,17 +16,6 @@ local L = DadGratz:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-function DadGratz:CHAT_MSG_GUILD(_,MSG,Auth)
-  DadGratz:Print("======================")
-  DadGratz:Print(L["GuildMessageReceived"])
-  DadGratz:Print(L["TestModeEnabled"] .. ", " .. L["triggering"] .. " ...")
-  DadGratz:TriggeredEvent(MSG,Auth,"GUILD")
-end
-
-function DadGratz:CHAT_MSG_GUILD_ACHIEVEMENT(_,MSG,Auth)
-  DadGratz:TriggeredEvent(MSG,Auth,"GUILD")
-end
-
 function DadGratz:TableLength(t)
    local count = 0
    for _ in pairs(t) do count = count + 1 end
