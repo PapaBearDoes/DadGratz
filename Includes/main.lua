@@ -16,22 +16,33 @@ local L = DadGratz:GetLocale()
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-function DadGratz:TriggeredEvent(message, recipient, channel)
-  DadGratz.db.global.cheevoCount = DadGratz.db.global.cheevoCount + 1
+function DadGratz:CHAT_MSG_GUILD(_,MSG,Auth)
+  DadGratz:Print("======================")
+  DadGratz:Print(L["GuildMessageReceived"])
+  DadGratz:Print(L["TestModeEnabled"] .. ", " .. L["triggering"] .. " ...")
+  DadGratz:TriggeredEvent(MSG,Auth)
+end
 
+function DadGratz:CHAT_MSG_GUILD_ACHIEVEMENT(_,MSG,Auth)
+  DadGratz:TriggeredEvent(MSG,Auth)
+end
+
+function DadGratz:TriggeredEvent(message, recipient)
+  DadGratz.db.global.cheevoCount = DadGratz.db.global.cheevoCount + 1
+  
   if DadGratz.db.profile.debug == true then
-    DadGratz:Print("DadGratz:TriggeredEvent")
+    DadGratz:Print("TriggeredEvent")
     DadGratz:Print("Cheevo Count: " .. DadGratz.db.global.cheevoCount)
   end
 
   if DadGratz.db.global.cheevoCount < 2 then
-    DadGratz:ScheduleTimer("Process", 5, message, recipient, channel)
+    DadGratz:ScheduleTimer("Process", 3, message, recipient)
   end
 end
 
-function DadGratz:Process(message, recipient, channel)
+function DadGratz:Process(message, recipient)
   if DadGratz.db.profile.debug == true then
-    DadGratz:Print("DadGratz:Process")
+    DadGratz:Print("Process")
   end
   local s, e = string.find(recipient, "[^-]+")
   local guildy = string.sub(recipient, 1, e)
@@ -44,7 +55,7 @@ function DadGratz:Process(message, recipient, channel)
       DadGratz:ScheduleTimer("pickGratz", delay, guildy)
     end
   else
-    if DadGratz.db.global.cheevoCount > 3 then
+    if DadGratz.db.global.cheevoCount > 2 then
       guildy = L["everyone"]
     end
 
@@ -59,7 +70,7 @@ end
 
 function DadGratz:pickGratz(guildy)
   if DadGratz.db.profile.debug == true then
-    DadGratz:Print("DadGratz:pickGratz")
+    DadGratz:Print("pickGratz")
   end
 
   local gratzType = {
