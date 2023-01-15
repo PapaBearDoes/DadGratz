@@ -35,16 +35,9 @@ function DadGratz:OnInitialize()
   
   if DadGratz.db.profile.debug == true then
     DadGratz:RegisterEvent("CHAT_MSG_GUILD")
-    -- [[ Start using AceBuckets for the achievement events instead of having to do cheevoCount ]]
-    DadGratz:RegisterBucketEvent("CHAT_MSG_ACHIEVEMENT", 5, "BucketFire") --DadGratz:CHAT_MSG_GUILD_ACHIEVEMENT)
-    DadGratz:RegisterBucketEvent("CHAT_MSG_GUILD", 5, "BucketFire") --DadGratz:CHAT_MSG_GUILD_ACHIEVEMENT)
-    --[[ end AceBuckets ]]
   end
 
   DadGratz:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT")
-  -- [[ Start using AceBuckets for the achievement events instead of having to do cheevoCount ]]
-  DadGratz:RegisterBucketEvent("CHAT_MSG_GUILD_ACHIEVEMENT", 2, "BucketFire") --DadGratz:CHAT_MSG_GUILD_ACHIEVEMENT)
-  --[[ end AceBuckets ]]
   
   DadGratz:MiniMapIcon()
   
@@ -62,10 +55,6 @@ function DadGratz:OnEnable()
   DadGratzOptionFrames.general = DadGratzDialog:AddToBlizOptions(L["AddonName"], nil, nil, "general")
   DadGratzOptionFrames.custom = DadGratzDialog:AddToBlizOptions(L["AddonName"], L["CustomGratz"], L["AddonName"], "custom")
   DadGratzOptionFrames.profile = DadGratzDialog:AddToBlizOptions(L["AddonName"], L["Profiles"], L["AddonName"], "profile")
-end
-
-function DadGratz:BucketFire(bucket)
-  DevTools_Dump(bucket)
 end
 --[[
      ########################################################################
