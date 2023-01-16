@@ -13,6 +13,7 @@ local _G = _G
 local me, ns = ...
 local DadGratz = ns
 local L = DadGratz:GetLocale()
+local DadGratzCTL = ChatThrottleLib
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
@@ -33,7 +34,7 @@ function DadGratz:FindGratz(t, n)
 end
 
 function DadGratz:SendMessage(message, recipient, channel)
-  SendChatMessage(message, channel, "Common", recipient)
+  DadGratzCTL:SendChatMessage("NORMAL", "", message, channel, "Common", recipient)
 end
 
 -- Config window --
