@@ -33,7 +33,7 @@ function DadGratz:OnInitialize()
   DadGratz.options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(DadGratz.db)
   LibStub("AceConfig-3.0"):RegisterOptionsTable(me, DadGratz.options, nil)
   
-  if DadGratz.db.profile.testMode == true then
+  if DadGratz.db.profile.debug == true then
     DadGratz:RegisterEvent("CHAT_MSG_GUILD")
   end
 
@@ -41,10 +41,12 @@ function DadGratz:OnInitialize()
   
   DadGratz:MiniMapIcon()
   
-  if DadGratz.db.profile.testMode == true then
-    print(L["AddonName"] .. ": " .. L["TestModeEnabled"])
-  end
   DadGratz.db.global.cheevoCount = 0
+
+  DadGratz:Print(L["AddonLoaded"])
+  if DadGratz.db.profile.debug == true then
+    DadGratz:Print(L["TestModeEnabled"])
+  end
 end
 
 function DadGratz:OnEnable()

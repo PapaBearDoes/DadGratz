@@ -13,21 +13,10 @@ local _G = _G
 local me, ns = ...
 local DadGratz = ns
 local L = DadGratz:GetLocale()
+local DadGratzCTL = ChatThrottleLib
 -- End Imports
 --[[ ######################################################################## ]]
 --   ## Do All The Things!!!
-function DadGratz:CHAT_MSG_GUILD(_,MSG,Auth)
-  print("")
-  print("======================")
-  print(L["GuildMessageReceived"])
-  print(L["TestModeEnabled"] .. ", " .. L["triggering"] .. " ...")
-  DadGratz:TriggeredEvent(MSG,Auth,"GUILD")
-end
-
-function DadGratz:CHAT_MSG_GUILD_ACHIEVEMENT(_,MSG,Auth)
-  DadGratz:TriggeredEvent(MSG,Auth,"GUILD")
-end
-
 function DadGratz:TableLength(t)
    local count = 0
    for _ in pairs(t) do count = count + 1 end
@@ -45,7 +34,7 @@ function DadGratz:FindGratz(t, n)
 end
 
 function DadGratz:SendMessage(message, recipient, channel)
-  SendChatMessage(message, channel, "Common", recipient)
+  DadGratzCTL:SendChatMessage("NORMAL", "", message, channel, "Common", recipient)
 end
 
 -- Config window --
