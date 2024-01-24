@@ -240,6 +240,7 @@ DadGratz.options = {
           order = 4,
           type = "select",
           width = "full",
+          confirmText = L["DelCustomGratzConfirm"],
           confirm = true,
           name = L["DelCustomGratz"],
           desc = L["DelCustomGratzDesc"],
