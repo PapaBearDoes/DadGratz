@@ -141,17 +141,19 @@ function DadGratz:pickGratz(guildy)
   
   if gratzTable == "gratzCustom" then
     local gratzSize = DadGratz:TableLength(DadGratz.db.profile.customGratz)
-    if DadGratz.db.profile.debug == true then
-      DadGratz:Print("GratzSize: " .. gratzSize)
-    end
-    local gratzRand = math.random(1, gratzSize)
-    if DadGratz.db.profile.debug == true then
-      DadGratz:Print("GratzRand: " .. gratzRand)
-    end
-    gratz = DadGratz:FindGratz(DadGratz.db.profile.customGratz, gratzRand)
-    if DadGratz.db.profile.debug == true then
-      DadGratz:Print("Gratz:")
-      DadGratz:Print(string.format(gratz, guildy))
+    if gratzSize > 0 then
+      if DadGratz.db.profile.debug == true then
+        DadGratz:Print("GratzSize: " .. gratzSize)
+      end
+      local gratzRand = math.random(1, gratzSize)
+      if DadGratz.db.profile.debug == true then
+        DadGratz:Print("GratzRand: " .. gratzRand)
+      end
+      gratz = DadGratz:FindGratz(DadGratz.db.profile.customGratz, gratzRand)
+      if DadGratz.db.profile.debug == true then
+        DadGratz:Print("Gratz:")
+        DadGratz:Print(string.format(gratz, guildy))
+      end
     end
   else
     local gratzSize = DadGratz:TableLength(L[gratzTable])
