@@ -109,6 +109,7 @@ L["gratzNaughty"] = {
 	["That's very good of you, %s. You're such a good player. Come sit by me and tell me all about it like the good player you are."] = true,
 	["These achievement jokes cum pretty easy once you get going ..."] = true,
 	["We had %s pegged from the beginning. Congrats!"] = true,
+  ["%s, you should be wearing purple ... cus dat achievement, and dat ass, are Epic!"] = true,
 }
 
 L["gratzNice"] = {
